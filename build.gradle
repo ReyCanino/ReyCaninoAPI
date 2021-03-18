@@ -40,6 +40,6 @@ sonarqube {
 		property "sonar.projectKey", "ReyCanino_ReyCaninoAPI"
 		property "sonar.organization", "reycanino"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property 'sonar.coverage.exclusions', ['**/TaskplannerBackendApplication.java']
+		property 'sonar.coverage.exclusions', ['**/DemoApplication.java']
 	}
 }
