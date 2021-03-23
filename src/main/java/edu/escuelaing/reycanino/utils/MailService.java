@@ -28,8 +28,8 @@ public class MailService {
 	@Autowired
 	DataBaseConnection dbConnection;
 
-	static final String sender = "reycaninostore@gmail.com";
-	static final String codificacion = "UTF-8";
+	static final String SENDER = "reycaninostore@gmail.com";
+	static final String COD = "UTF-8";
 
 	static final Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.utils.MailService");
 
@@ -46,7 +46,7 @@ public class MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 					message.setTo(cliente.getCorreo());
-					message.setFrom(sender);
+					message.setFrom(SENDER);
 					message.setSubject("¡Confirma tu reserva!");
 
 					String url = "http://reycanino.herokuapp.com/reyCanino/confirmar/";
@@ -73,7 +73,7 @@ public class MailService {
 
 					StringWriter text = new StringWriter();
 					VelocityEngine ve = new VelocityEngine();
-					ve.mergeTemplate("validacion.vm", codificacion, velocityContext, text);
+					ve.mergeTemplate("validacion.vm", COD, velocityContext, text);
 					message.setText(text.toString(), true);
 				}
 			};
@@ -94,7 +94,7 @@ public class MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 					message.setTo(cliente.getCorreo());
-					message.setFrom(sender);
+					message.setFrom(SENDER);
 					message.setSubject("¡Resumen de tu reserva!");
 
 					String dateAux = "";
@@ -118,7 +118,7 @@ public class MailService {
 
 					StringWriter text = new StringWriter();
 					VelocityEngine ve = new VelocityEngine();
-					ve.mergeTemplate("plantilla.vm", codificacion, velocityContext, text);
+					ve.mergeTemplate("plantilla.vm", COD, velocityContext, text);
 					message.setText(text.toString(), true);
 				}
 			};
@@ -137,7 +137,7 @@ public class MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 					message.setTo(cliente.getCorreo());
-					message.setFrom(sender);
+					message.setFrom(SENDER);
 					message.setSubject("¡Ops ha ocurrido un error!");
 
 					VelocityContext velocityContext = new VelocityContext();
@@ -145,7 +145,7 @@ public class MailService {
 
 					StringWriter text = new StringWriter();
 					VelocityEngine ve = new VelocityEngine();
-					ve.mergeTemplate("error.vm", codificacion, velocityContext, text);
+					ve.mergeTemplate("error.vm", COD, velocityContext, text);
 					message.setText(text.toString(), true);
 				}
 			};

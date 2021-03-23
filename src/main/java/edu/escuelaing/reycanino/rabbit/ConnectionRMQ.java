@@ -8,7 +8,7 @@ import java.util.logging.Level;
 
 public class ConnectionRMQ {
     private static final Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.rabbitmq.ConnectionRMQ");
-    private static ConnectionFactory factory = new ConnectionFactory();;
+    private static ConnectionFactory factory = new ConnectionFactory();
     private static Connection connection;
     private static Channel channel;
 
