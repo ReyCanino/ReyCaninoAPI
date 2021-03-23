@@ -20,8 +20,8 @@ import edu.escuelaing.reycanino.model.Cliente;
 @Service("DbConnection")
 public class DataBaseConnection {
 
-    static RethinkDB r = RethinkDB.r;
-    static Connection connection;
+    private RethinkDB r = RethinkDB.r;
+    private Connection connection;
     private final String host = "ec2-34-235-155-214.compute-1.amazonaws.com";
     private final String dbName = "ReyCanino";
     private final String tableHorarios = "Horario";
