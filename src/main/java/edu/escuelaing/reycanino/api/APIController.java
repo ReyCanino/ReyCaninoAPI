@@ -15,7 +15,7 @@ public class APIController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> consultsAvailableDates() {
         try {
-            return new ResponseEntity<>("Rey canino", HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Rey canino", HttpStatus.OK);
         } catch (Exception e) {
             Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
