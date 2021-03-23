@@ -14,7 +14,7 @@ public class ConnectionRMQ {
         factory.setHost(ConfigurationRMQ.RABBITMQ_SERVER);
         factory.setPort(ConfigurationRMQ.RABBITMQ_PORT);
         factory.setUsername(ConfigurationRMQ.USERNAME);
-        factory.setPassword(ConfigurationRMQ.PASSWORD);
+        factory.setPassword(ConfigurationRMQ.SECRET);
     }
 
     public static Channel create() {
@@ -23,9 +23,9 @@ public class ConnectionRMQ {
             channel = connection.createChannel();
             channel.queueDeclare(ConfigurationRMQ.QUEUE_NAME, false, false, false, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } catch (TimeoutException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
         return channel;
     }
@@ -35,9 +35,9 @@ public class ConnectionRMQ {
             channel.close();
             connection.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } catch (TimeoutException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
     }
 }

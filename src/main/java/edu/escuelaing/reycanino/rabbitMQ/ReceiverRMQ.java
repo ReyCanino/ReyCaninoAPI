@@ -70,7 +70,7 @@ public class ReceiverRMQ {
 		try {
 			channel.basicConsume(ConfigurationRMQ.QUEUE_NAME, true, consumer);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println(e);
 		}
 	}
 }

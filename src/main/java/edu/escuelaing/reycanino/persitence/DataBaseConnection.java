@@ -104,7 +104,7 @@ public class DataBaseConnection {
 
     public Horario insertarReserva(Horario horario) {
         OffsetDateTime nowDateTime = OffsetDateTime.now();
-        nowDateTime.plusDays(1);
+        nowDateTime = nowDateTime.plusDays(1);
         connection = RethinkDBConnectionFactory.createConnection();
 
         HashMap<String, Object> insert = r.db("ReyCanino").table("Reserva")

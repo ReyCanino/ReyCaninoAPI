@@ -45,9 +45,17 @@ public class SenderRMQ {
 			channel.basicPublish("", ConfigurationRMQ.QUEUE_NAME, null, message.getBytes());
 			channel.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println(e);
 		} catch (TimeoutException e) {
-			e.printStackTrace();
+			System.err.println(e);
+		} finally {
+			try {
+				channel.close();
+			} catch (IOException e) {
+				System.err.println(e);
+			} catch (TimeoutException e) {
+				System.err.println(e);
+			}
 		}
 
 	}

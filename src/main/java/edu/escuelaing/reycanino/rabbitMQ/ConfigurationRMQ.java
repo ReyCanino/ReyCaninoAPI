@@ -9,7 +9,7 @@ public class ConfigurationRMQ {
 	public static final String QUEUE_NAME = "Queue ReyCaninoReserva";
 	public static final int RABBITMQ_PORT = 5672;
 	public static final String USERNAME = "guest";
-	public static final String PASSWORD = "guest";
+	public static final String SECRET = "guest";
 
 	@Bean
 	public ConnectionRMQ createConnectionFactory() {

@@ -69,7 +69,7 @@ public class MailService {
 				}
 			};
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e);
 		}
 		mailSender.send(preparator);
 	}
@@ -114,7 +114,7 @@ public class MailService {
 				}
 			};
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e);
 		}
 		this.mailSender.send(preparator);
 	}
@@ -141,7 +141,7 @@ public class MailService {
 				}
 			};
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e);
 		}
 		this.mailSender.send(preparator);
 	}
