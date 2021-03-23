@@ -1,10 +1,16 @@
 package edu.escuelaing.reycanino.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import edu.escuelaing.reycanino.model.Horario;
+import edu.escuelaing.reycanino.services.ReyCaninoService;
+
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,10 +18,13 @@ import java.util.logging.Logger;
 @RequestMapping(value = "/reyCanino")
 public class APIController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<?> consultsAvailableDates() {
+    @Autowired
+    ReyCaninoService services;
+
+    @GetMapping(value = "/")
+    public ResponseEntity<List<Horario>> consultsAvailableDates() {
         try {
-            return new ResponseEntity<>("Rey canino", HttpStatus.OK);
+            return new ResponseEntity<List<Horario>>(services.consultsAvailableDates(), HttpStatus.OK);
         } catch (Exception e) {
             Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,8 +1,11 @@
 package edu.escuelaing.reycanino.utils;
 
 import java.io.StringWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.mail.internet.MimeMessage;
-import edu.escuelaing.reycanino.persitence.DataBaseConnection;
+
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 import edu.escuelaing.reycanino.model.Cliente;
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.model.Reserva;
+import edu.escuelaing.reycanino.persitence.DataBaseConnection;
 
 @Service("Mail")
 public class MailService {
@@ -23,6 +27,11 @@ public class MailService {
 
 	@Autowired
 	DataBaseConnection dbConnection;
+
+	final String sender = "reycaninostore@gmail.com";
+	final String codificacion = "UTF-8";
+
+	final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.utils.MailService");
 
 	public void sendValidationEmail(Horario horario) {
 		MimeMessagePreparator preparator = null;
@@ -37,7 +46,7 @@ public class MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 					message.setTo(cliente.getCorreo());
-					message.setFrom("reycaninostore@gmail.com");
+					message.setFrom(sender);
 					message.setSubject("¡Confirma tu reserva!");
 
 					String url = "http://reycanino.herokuapp.com/reyCanino/confirmar/";
@@ -64,12 +73,12 @@ public class MailService {
 
 					StringWriter text = new StringWriter();
 					VelocityEngine ve = new VelocityEngine();
-					ve.mergeTemplate("validacion.vm", "UTF-8", velocityContext, text);
+					ve.mergeTemplate("validacion.vm", codificacion, velocityContext, text);
 					message.setText(text.toString(), true);
 				}
 			};
 		} catch (Exception e) {
-			System.err.println(e);
+			LOG.log(Level.INFO, e.getLocalizedMessage());
 		}
 		mailSender.send(preparator);
 	}
@@ -85,7 +94,7 @@ public class MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 					message.setTo(cliente.getCorreo());
-					message.setFrom("reycaninostore@gmail.com");
+					message.setFrom(sender);
 					message.setSubject("¡Resumen de tu reserva!");
 
 					String dateAux = "";
@@ -109,12 +118,12 @@ public class MailService {
 
 					StringWriter text = new StringWriter();
 					VelocityEngine ve = new VelocityEngine();
-					ve.mergeTemplate("plantilla.vm", "UTF-8", velocityContext, text);
+					ve.mergeTemplate("plantilla.vm", codificacion, velocityContext, text);
 					message.setText(text.toString(), true);
 				}
 			};
 		} catch (Exception e) {
-			System.err.println(e);
+			LOG.log(Level.INFO, e.getLocalizedMessage());
 		}
 		this.mailSender.send(preparator);
 	}
@@ -128,7 +137,7 @@ public class MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 					message.setTo(cliente.getCorreo());
-					message.setFrom("reycaninostore@gmail.com");
+					message.setFrom(sender);
 					message.setSubject("¡Ops ha ocurrido un error!");
 
 					VelocityContext velocityContext = new VelocityContext();
@@ -136,12 +145,12 @@ public class MailService {
 
 					StringWriter text = new StringWriter();
 					VelocityEngine ve = new VelocityEngine();
-					ve.mergeTemplate("error.vm", "UTF-8", velocityContext, text);
+					ve.mergeTemplate("error.vm", codificacion, velocityContext, text);
 					message.setText(text.toString(), true);
 				}
 			};
 		} catch (Exception e) {
-			System.err.println(e);
+			LOG.log(Level.INFO, e.getLocalizedMessage());
 		}
 		this.mailSender.send(preparator);
 	}

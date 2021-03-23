@@ -1,7 +1,9 @@
-package edu.escuelaing.reycanino.rabbitMQ;
+package edu.escuelaing.reycanino.rabbitmq;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import edu.escuelaing.reycanino.model.Reserva;
 
 @Service("Sender")
 public class SenderRMQ {
+
+	final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.rabbitmq.SenderRMQ");
 
 	public String reservar(Horario horario) {
 		String m = "";
@@ -44,17 +48,13 @@ public class SenderRMQ {
 		try {
 			channel.basicPublish("", ConfigurationRMQ.QUEUE_NAME, null, message.getBytes());
 			channel.close();
-		} catch (IOException e) {
-			System.err.println(e);
-		} catch (TimeoutException e) {
-			System.err.println(e);
+		} catch (IOException | TimeoutException e) {
+			LOG.log(Level.INFO, e.getLocalizedMessage());
 		} finally {
 			try {
 				channel.close();
-			} catch (IOException e) {
-				System.err.println(e);
-			} catch (TimeoutException e) {
-				System.err.println(e);
+			} catch (IOException | TimeoutException e) {
+				LOG.log(Level.INFO, e.getLocalizedMessage());
 			}
 		}
 

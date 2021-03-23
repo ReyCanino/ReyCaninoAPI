@@ -10,6 +10,7 @@ public class Cliente {
     private String tipo;
 
     public Cliente() {
+        // Do nothing
     }
 
     public String getNombre() {

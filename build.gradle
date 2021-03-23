@@ -22,7 +22,6 @@ dependencies {
 	implementation group: 'com.rabbitmq', name: 'amqp-client', version: '5.10.0'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.3.7.RELEASE'
 	implementation group: 'org.apache.velocity', name: 'velocity', version: '1.7'
-
 }
 
 test {

@@ -1,11 +1,14 @@
-package edu.escuelaing.reycanino.rabbitMQ;
+package edu.escuelaing.reycanino.rabbitmq;
 
 import com.rabbitmq.client.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class ConnectionRMQ {
-    private static ConnectionFactory factory = null;
+    final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.rabbitmq.ConnectionRMQ");
+    private static ConnectionFactory factory;
     private static Connection connection;
     private static Channel channel;
 
@@ -22,10 +25,8 @@ public class ConnectionRMQ {
             connection = factory.newConnection();
             channel = connection.createChannel();
             channel.queueDeclare(ConfigurationRMQ.QUEUE_NAME, false, false, false, null);
-        } catch (IOException e) {
-            System.err.println(e);
-        } catch (TimeoutException e) {
-            System.err.println(e);
+        } catch (IOException | TimeoutException e) {
+            LOG.log(Level.INFO, e.getLocalizedMessage());
         }
         return channel;
     }
@@ -34,10 +35,8 @@ public class ConnectionRMQ {
         try {
             channel.close();
             connection.close();
-        } catch (IOException e) {
-            System.err.println(e);
-        } catch (TimeoutException e) {
-            System.err.println(e);
+        } catch (IOException | TimeoutException e) {
+            LOG.log(Level.INFO, e.getLocalizedMessage());
         }
     }
 }

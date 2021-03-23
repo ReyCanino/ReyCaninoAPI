@@ -1,4 +1,4 @@
-package edu.escuelaing.reycanino.rabbitMQ;
+package edu.escuelaing.reycanino.rabbitmq;
 
 import com.rabbitmq.client.*;
 
@@ -8,6 +8,9 @@ import edu.escuelaing.reycanino.persitence.DataBaseConnection;
 import edu.escuelaing.reycanino.utils.MailService;
 
 import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.nio.charset.StandardCharsets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ public class ReceiverRMQ {
 
 	@Autowired
 	DataBaseConnection dbConnection;
+
+	final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.services.ReyCaninoService");
 
 	public void recibir(String message) {
 
@@ -63,14 +68,14 @@ public class ReceiverRMQ {
 			@Override
 			public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties,
 					byte[] body) throws IOException {
-				String message = new String(body, "UTF-8");
+				String message = new String(body, StandardCharsets.UTF_8);
 				recibir(message);
 			}
 		};
 		try {
 			channel.basicConsume(ConfigurationRMQ.QUEUE_NAME, true, consumer);
 		} catch (IOException e) {
-			System.err.println(e);
+			LOG.log(Level.INFO, e.getLocalizedMessage());
 		}
 	}
 }
