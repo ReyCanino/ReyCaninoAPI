@@ -1,4 +1,4 @@
-package edu.escuelaing.reycanino.rabbitmq;
+package edu.escuelaing.reycanino.rabbit;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -15,7 +15,7 @@ import edu.escuelaing.reycanino.model.Reserva;
 @Service("Sender")
 public class SenderRMQ {
 
-	final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.rabbitmq.SenderRMQ");
+	static final Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.rabbitmq.SenderRMQ");
 
 	public String reservar(Horario horario) {
 		String m = "";

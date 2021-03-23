@@ -28,10 +28,10 @@ public class MailService {
 	@Autowired
 	DataBaseConnection dbConnection;
 
-	final String sender = "reycaninostore@gmail.com";
-	final String codificacion = "UTF-8";
+	static final String sender = "reycaninostore@gmail.com";
+	static final String codificacion = "UTF-8";
 
-	final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.utils.MailService");
+	static final Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.utils.MailService");
 
 	public void sendValidationEmail(Horario horario) {
 		MimeMessagePreparator preparator = null;

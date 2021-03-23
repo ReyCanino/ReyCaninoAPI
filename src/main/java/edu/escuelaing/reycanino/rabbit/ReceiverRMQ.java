@@ -1,4 +1,4 @@
-package edu.escuelaing.reycanino.rabbitmq;
+package edu.escuelaing.reycanino.rabbit;
 
 import com.rabbitmq.client.*;
 
@@ -24,7 +24,7 @@ public class ReceiverRMQ {
 	@Autowired
 	DataBaseConnection dbConnection;
 
-	final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.services.ReyCaninoService");
+	static final Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.services.ReyCaninoService");
 
 	public void recibir(String message) {
 

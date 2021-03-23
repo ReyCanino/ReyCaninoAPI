@@ -1,4 +1,4 @@
-package edu.escuelaing.reycanino.rabbitmq;
+package edu.escuelaing.reycanino.rabbit;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

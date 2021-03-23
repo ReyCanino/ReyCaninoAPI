@@ -22,11 +22,11 @@ public class DataBaseConnection {
 
     private RethinkDB r = RethinkDB.r;
     private Connection connection;
-    private final String host = "ec2-34-235-155-214.compute-1.amazonaws.com";
-    private final String dbName = "ReyCanino";
-    private final String tableHorarios = "Horario";
-    private final String reservaLabel = "reserva";
-    private final int port = 32769;
+    private static final String host = "ec2-34-235-155-214.compute-1.amazonaws.com";
+    private static final String dbName = "ReyCanino";
+    private static final String tableHorarios = "Horario";
+    private static final String reservaLabel = "reserva";
+    private static final int port = 32769;
 
     private Connection createConnection() {
         return RethinkDB.r.connection().hostname(host).port(port).connect();

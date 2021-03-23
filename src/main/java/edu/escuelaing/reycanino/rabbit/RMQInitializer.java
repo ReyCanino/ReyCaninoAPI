@@ -1,4 +1,4 @@
-package edu.escuelaing.reycanino.rabbitmq;
+package edu.escuelaing.reycanino.rabbit;
 
 // import org.springframework.beans.factory.InitializingBean;
 // import org.springframework.beans.factory.annotation.Autowired;

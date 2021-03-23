@@ -1,4 +1,4 @@
-package edu.escuelaing.reycanino.rabbitmq;
+package edu.escuelaing.reycanino.rabbit;
 
 import com.rabbitmq.client.*;
 import java.io.IOException;
@@ -7,13 +7,12 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class ConnectionRMQ {
-    final static Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.rabbitmq.ConnectionRMQ");
-    private static ConnectionFactory factory;
+    private static final Logger LOG = Logger.getLogger("edu.escuelaing.reycanino.rabbitmq.ConnectionRMQ");
+    private static ConnectionFactory factory = new ConnectionFactory();;
     private static Connection connection;
     private static Channel channel;
 
     public ConnectionRMQ() {
-        factory = new ConnectionFactory();
         factory.setHost(ConfigurationRMQ.RABBITMQ_SERVER);
         factory.setPort(ConfigurationRMQ.RABBITMQ_PORT);
         factory.setUsername(ConfigurationRMQ.USERNAME);
