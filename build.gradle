@@ -17,10 +17,11 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-test {
-	useJUnitPlatform()
+	compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version: '2.3.3'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '2.4.4'
+	implementation group: 'com.rabbitmq', name: 'amqp-client', version: '5.10.0'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.3.7.RELEASE'
+	implementation group: 'org.apache.velocity', name: 'velocity', version: '1.7'
 }
 
 test {
