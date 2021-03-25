@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.services.ReyCaninoService;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,9 +26,8 @@ public class APIController {
     ReyCaninoService services;
 
     @PostMapping(value = "/consultar")
-    public ResponseEntity<?> consultsAvailableDates(@RequestBody Horario horario) {
+    public ResponseEntity<List<Horario>> consultsAvailableDates(@RequestBody Horario horario) {
         try {
-            System.out.println(horario);
             return new ResponseEntity<>(services.consultsAvailableDates(horario), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
@@ -36,7 +36,7 @@ public class APIController {
     }
 
     @PostMapping(value = "/reservar")
-    public ResponseEntity<?> reservar(@RequestBody Horario horario) {
+    public ResponseEntity<String> reservar(@RequestBody Horario horario) {
         try {
             services.reservar(horario);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -47,18 +47,18 @@ public class APIController {
     }
 
     @GetMapping(value = "/confirmar/{reserva}")
-    public ModelAndView confirmacion(@PathVariable() String reserva) {
+    public ResponseEntity<String> confirmacion(@PathVariable() String reserva) {
         try {
             services.confirmar(reserva);
-            return new ModelAndView("redirect:/correcta.html");
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
-            return new ModelAndView("redirect:/fallida.html");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping(value = "/consultar/{id}")
-    public ResponseEntity<?> consultarReserva(@PathVariable() String id) {
+    public ResponseEntity<Horario> consultarReserva(@PathVariable() String id) {
         try {
             Horario horario = services.consultarReserva(id);
             return new ResponseEntity<>(horario, HttpStatus.OK);
