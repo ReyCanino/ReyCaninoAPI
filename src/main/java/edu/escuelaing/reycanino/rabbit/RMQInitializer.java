@@ -1,15 +1,15 @@
 package edu.escuelaing.reycanino.rabbit;
 
-// import org.springframework.beans.factory.InitializingBean;
-// import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class RMQInitializer {// implements InitializingBean {
+public class RMQInitializer implements InitializingBean {
 
-    // @Autowired
-    // private ReceiverRMQ receiver;
+    @Autowired
+    private ReceiverRMQ receiver;
 
-    // @Override
-    // public void afterPropertiesSet() throws Exception {
-    // receiver.receiveMesssage();
-    // }
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        receiver.receiveMesssage();
+    }
 }

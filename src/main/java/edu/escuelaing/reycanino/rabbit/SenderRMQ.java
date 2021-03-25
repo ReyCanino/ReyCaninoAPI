@@ -1,8 +1,8 @@
 package edu.escuelaing.reycanino.rabbit;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 
 import org.springframework.stereotype.Service;
@@ -47,8 +47,7 @@ public class SenderRMQ {
 		Channel channel = ConnectionRMQ.create();
 		try {
 			channel.basicPublish("", ConfigurationRMQ.QUEUE_NAME, null, message.getBytes());
-			channel.close();
-		} catch (IOException | TimeoutException e) {
+		} catch (IOException e) {
 			LOG.log(Level.INFO, e.getLocalizedMessage());
 		} finally {
 			try {
@@ -57,6 +56,5 @@ public class SenderRMQ {
 				LOG.log(Level.INFO, e.getLocalizedMessage());
 			}
 		}
-
 	}
 }

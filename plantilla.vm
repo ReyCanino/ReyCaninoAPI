@@ -1,0 +1,103 @@
+<html>
+<body>
+	<tbody>
+    	<tr><td height="20"></td></tr>
+    	<tr>
+        	<td align="center">
+            	<table style="font-family:'Poppins',sans-serif" width="600px" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" align="center">
+                	<tbody>
+                    <tr>
+                        <td width="20"></td>
+                        <td align="center">
+                            <table id="m_1178051568808726804order" style="background-color:white;margin:0 auto;padding:0" width="600px" cellspacing="30" cellpadding="20" border="0" align="center">
+                                <tbody>
+                                    <tr>
+                                        <td align="left">
+                                            <img src="https://raw.githubusercontent.com/mariahv9/ReyCanino_ARSW/master/resources/Logo.png" alt="" class="CToWUd" width="100px" height="100px">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span style="width:622px;height:144px;font-family:'Poppins',sans-serif;font-size:52px;font-weight:600;font-stretch:normal;font-style:normal;line-height:1.29;letter-spacing:-2.63px;color:#332927">Resumen de su reserva
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p style="font-family:'Poppins',sans-serif;font-size:24px;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">$user,<br>
+                                            </p><p style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#706967">Se ha procesado exitosamente su reserva.</p>
+                                        <p></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span style="width:355px;height:40px;font-family:'Poppins',sans-serif;font-size:32px;font-weight:600;font-stretch:normal;font-style:normal;line-height:1.25;letter-spacing:-1.33px;color:#332927">Detalles de la reserva</span>
+                                        </td>
+
+                                        <tr><td><table width="90%">
+                                            <tbody>
+                                            	<tr style="width:622px;height:64px">
+                                                    <td>
+                                                        <span style="width:185px;height:28px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">Mascota</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;text-align:right;font-size:20px;color:#332927">$nombreMascota</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:622px;height:64px">
+                                                    <td>
+                                                        <span style="width:185px;height:28px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">Tienda</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;text-align:right;font-size:20px;color:#332927">$nombreTienda</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:622px;height:64px">
+                                                    <td>
+                                                        <span style="width:185px;height:28px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">Dirección</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;text-align:right;font-size:20px;color:#332927">$direccion</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:622px;height:64px">
+                                                    <td>
+                                                        <span style="width:185px;height:28px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">Servicio</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;text-align:right;font-size:20px;color:#332927">$nombreServicio</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:622px;height:64px">
+                                                    <td>
+                                                        <span style="width:185px;height:28px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">Fecha</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;text-align:right;font-size:20px;color:#332927">$fecha</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:622px;height:64px">
+                                                    <td>
+                                                        <span style="width:185px;height:28px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">Código</span>
+                                                    </td>
+                                                    <td align="right">
+                                                        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;text-align:right;font-size:20px;color:#332927">$codigo</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                    <tr>
+                                        <td>
+                                            <p style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#706967">Recuerda llegar a tiempo a tu cita en la fecha especificada.</p>
+                                        <p></p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+	</tbody>
+</body>
+</html>
