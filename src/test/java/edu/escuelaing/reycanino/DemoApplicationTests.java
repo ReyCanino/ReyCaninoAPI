@@ -75,6 +75,6 @@ class DemoApplicationTests {
 	@Test
 	public void testConsultarReservar() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/consultar/1234").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound());
+				.andExpect(status().isOk());
 	}
 }
