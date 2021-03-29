@@ -69,7 +69,7 @@ class DemoApplicationTests {
 	@Test
 	void testConfirmarReservar() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/confirmar/021a4c42-1335-42a0-9b55-f4a44825f60a")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 	}
 
 	@Test
