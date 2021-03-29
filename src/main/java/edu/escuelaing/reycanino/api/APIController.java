@@ -57,11 +57,10 @@ public class APIController {
         }
     }
 
-    @GetMapping(value = "/cliente/{reserva}")
-    public ResponseEntity<Cliente> consultarCliente(@PathVariable() String reserva) {
+    @GetMapping(value = "/cliente/{cliente}")
+    public ResponseEntity<Cliente> consultarCliente(@PathVariable() String cliente) {
         try {
-            services.consultarCliente(reserva);
-            return new ResponseEntity<>(services.consultarCliente(reserva), HttpStatus.OK);
+            return new ResponseEntity<>(services.consultarCliente(cliente), HttpStatus.OK);
         } catch (Exception e) {
             Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

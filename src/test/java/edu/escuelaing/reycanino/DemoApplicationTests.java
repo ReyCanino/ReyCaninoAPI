@@ -74,8 +74,8 @@ class DemoApplicationTests {
 
 	@Test
 	void testCancelarReservar() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cancelar/021a4c42-1335-42a0-9b55-f4a44825f60a")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cancelar/56fcb644-c656-4a99-97b0-561fd106de18")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 	@Test
