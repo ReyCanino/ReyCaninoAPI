@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import edu.escuelaing.reycanino.model.Cliente;
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.services.ReyCaninoService;
 
@@ -57,6 +57,17 @@ public class APIController {
         }
     }
 
+    @GetMapping(value = "/cliente/{reserva}")
+    public ResponseEntity<Cliente> consultarCliente(@PathVariable() String reserva) {
+        try {
+            services.consultarCliente(reserva);
+            return new ResponseEntity<>(services.consultarCliente(reserva), HttpStatus.OK);
+        } catch (Exception e) {
+            Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(value = "/consultar/{id}")
     public ResponseEntity<Horario> consultarReserva(@PathVariable() String id) {
         try {
@@ -69,7 +80,7 @@ public class APIController {
     }
 
     @GetMapping(value = "/cancelar/{id}")
-    public ResponseEntity<?> cancelarReserva(@PathVariable() String id) {
+    public ResponseEntity<String> cancelarReserva(@PathVariable() String id) {
         try {
             String reserva = services.cancelarReserva(id);
             return new ResponseEntity<>(reserva, HttpStatus.OK);

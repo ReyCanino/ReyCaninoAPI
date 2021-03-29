@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.escuelaing.reycanino.model.Cliente;
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.model.Reserva;
 import edu.escuelaing.reycanino.persitence.DataBaseConnection;
@@ -25,8 +26,7 @@ public class ReyCaninoService {
     }
 
     public String reservar(Horario horario) {
-        String reservaMessage = sender.reservar(horario);
-        return reservaMessage;
+        return sender.reservar(horario);
     }
 
     public String confirmar(String id) throws ReyCaninoException {
@@ -36,24 +36,25 @@ public class ReyCaninoService {
             throw new ReyCaninoException(ReyCaninoException.NO_EXISTE_RESERVA);
         if (now.isBefore(reserva.getFechaLimite()))
             throw new ReyCaninoException(ReyCaninoException.TIEMPO_EXPIRADO);
-        String reservaMessage = sender.confirmar(reserva);
-        return reservaMessage;
+        return sender.confirmar(reserva);
     }
 
     public Horario consultarReserva(String id) {
-        Horario horario = dbService.consultarReserva(id);
-        return horario;
+        return dbService.buscarHorario(id);
     }
 
     public String cancelarReserva(String id) {
-        Horario horario = dbService.consultarReserva(id);
-        if (horario != null) {
-            if (horario.getReserva() != null && horario.getFi().isAfter(OffsetDateTime.now())) {
-                dbService.cancelarReserva(id);
-                return "Éxito";
-            }
+        Horario horario = dbService.buscarHorario(id);
+        if (horario.getReserva() != null && horario.getFi().isAfter(OffsetDateTime.now())) {
+            dbService.cancelarReserva(id);
+            return "Éxito";
         }
+
         return "Fallo";
+    }
+
+    public Cliente consultarCliente(String cliente) {
+        return dbService.buscarCliente(cliente);
     }
 
 }

@@ -51,7 +51,6 @@ public class DataBaseConnection {
         a2 = c.get(Calendar.YEAR);
         m2 = c.get(Calendar.MONTH) + 1;
         d2 = c.get(Calendar.DAY_OF_MONTH);
-        System.out.println(a1 + " " + m1 + " " + d1 + " " + a2 + " " + m2 + " " + d2);
         createConnection();
 
         ArrayList<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO)
@@ -61,7 +60,6 @@ public class DataBaseConnection {
                 .filter(horario -> horario.g("fi").during(r.time(a1, m1, d1, "Z"), r.time(a2, m2, d2, "Z")))
                 .filter(horario -> horario.g(RESERVA_LABEL).eq(null)).orderBy("fi").run(connection, Horario.class);
         ArrayList<Horario> l = new ArrayList<>();
-        System.out.println(query.size());
         for (int i = 0; i < query.size(); i++) {
             l.add(Util.convertToPojo(query.get(i), Optional.of(Horario.class)));
         }
@@ -134,18 +132,6 @@ public class DataBaseConnection {
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
         horario.getReserva().setId(llaves.get(0));
-        connection.close();
-        return horario;
-    }
-
-    public Horario consultarReserva(String id) {
-        createConnection();
-        Cursor<Horario> c = r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField("id").eq(id)).run(connection,
-                Horario.class);
-        Horario horario = null;
-        for (Horario o : c) {
-            horario = o;
-        }
         connection.close();
         return horario;
     }
