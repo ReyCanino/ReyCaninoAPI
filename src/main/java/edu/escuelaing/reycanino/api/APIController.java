@@ -67,6 +67,16 @@ public class APIController {
         }
     }
 
+    @PostMapping(value = "/login")
+    public ResponseEntity<Cliente> login(@RequestBody Cliente cliente) {
+        try {
+            return new ResponseEntity<>(services.login(cliente), HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(value = "/consultar/{id}")
     public ResponseEntity<Horario> consultarReserva(@PathVariable() String id) {
         try {

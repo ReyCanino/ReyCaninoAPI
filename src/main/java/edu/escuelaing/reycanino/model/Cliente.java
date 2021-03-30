@@ -8,6 +8,7 @@ public class Cliente {
     private String direccion;
     private String id;
     private String tipo;
+    private String psw;
 
     public Cliente() {
         // Do nothing
@@ -61,11 +62,19 @@ public class Cliente {
         this.tipo = tipo;
     }
 
+    public String getPsw() {
+        return this.psw;
+    }
+
+    public void setPsw(String psw) {
+        this.psw = psw;
+    }
+
     @Override
     public String toString() {
         return "{" + " nombre='" + getNombre() + "'" + ", telefono='" + getTelefono() + "'" + ", correo='" + getCorreo()
                 + "'" + ", direccion='" + getDireccion() + "'" + ", id='" + getId() + "'" + ", tipo='" + getTipo() + "'"
-                + "}";
+                + ", psw='" + getPsw() + "'" + "}";
     }
 
 }

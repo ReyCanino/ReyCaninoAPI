@@ -26,3 +26,13 @@ content-type: application/json
 
 ###Consultar reserva
 GET http://localhost:8080/reyCanino/consultar/97816b1c-33e7-4403-b83f-4ba7bdd4d583
+
+
+###Login
+POST http://localhost:8080/reyCanino/login/
+content-type: application/json
+
+{
+    "correo":"mafehv1999@hotmail.com",
+    "psw":"03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
+}
