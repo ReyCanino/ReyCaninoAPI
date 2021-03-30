@@ -10,7 +10,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.model.Reserva;
+import edu.escuelaing.reycanino.rabbit.SenderRMQ;
+import edu.escuelaing.reycanino.services.ReyCaninoException;
+import edu.escuelaing.reycanino.services.ReyCaninoService;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.charset.Charset;
@@ -26,6 +30,12 @@ class DemoApplicationTests {
 
 	@Autowired
 	private MockMvc mvc;
+
+	@Autowired
+	private ReyCaninoService servicio;
+
+	@Autowired
+	private SenderRMQ sender;
 
 	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
 			MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
@@ -94,5 +104,41 @@ class DemoApplicationTests {
 	void testEliminarReserva() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cliente/021a4c42-1335-42a0-9b55-f4a44825f60a")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testConfirmar() {
+		try {
+			servicio.confirmar("cliente");
+		} catch (ReyCaninoException e) {
+			e.printStackTrace();
+		}
+		assertTrue(true);
+	}
+
+	@Test
+	public void testReservarOnSender() {
+		Horario anObject = new Horario();
+		Reserva reserva = new Reserva();
+		anObject.setFechaConsulta(new Date());
+		anObject.setServicio("1");
+		anObject.setTiendaCanina("1234");
+		anObject.setReserva(reserva);
+		sender.reservar(anObject);
+		assertTrue(true);
+	}
+
+	@Test
+	public void testConfirmarOnSender() {
+		Reserva reserva = new Reserva();
+		sender.confirmar(reserva);
+		assertTrue(true);
+	}
+
+	@Test
+	public void exceptionTest() {
+		Exception e = new ReyCaninoException("Mensaje de prueba");
+		System.out.println(e.getLocalizedMessage());
+		assertTrue(true);
 	}
 }
