@@ -89,4 +89,10 @@ class DemoApplicationTests {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cliente/038e2c41-e374-4770-9331-6861550d9427")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
+
+	@Test
+	void testEliminarReserva() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cliente/021a4c42-1335-42a0-9b55-f4a44825f60a")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
 }
