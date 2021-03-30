@@ -58,6 +58,20 @@ class DemoApplicationTests {
 	}
 
 	@Test
+	void testConsultaFail() throws Exception {
+		String url = "/reyCanino/consultar";
+		Reserva anObject = new Reserva();
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(anObject);
+
+		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
 	void testReservar() throws Exception {
 		String url = "/reyCanino/reservar";
 		Horario anObject = new Horario();
