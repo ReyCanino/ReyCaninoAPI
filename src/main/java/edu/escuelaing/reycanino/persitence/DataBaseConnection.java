@@ -22,18 +22,19 @@ public class DataBaseConnection {
 
     private RethinkDB r = RethinkDB.r;
     private Connection connection;
-    private static final String HOST = "ec2-34-235-155-214.compute-1.amazonaws.com";
+    private static final String HOST = "ec2-54-160-111-65.compute-1.amazonaws.com";
     private static final String DB_NAME = "ReyCanino";
     private static final String TABLE_HORARIO = "Horario";
+    private static final String TABLE_RESERVA = "Reserva";
     private static final String RESERVA_LABEL = "reserva";
     private static final int PORT = 32769;
 
-    private Connection createConnection() {
-        return RethinkDB.r.connection().hostname(HOST).port(PORT).connect();
+    private void createConnection() {
+        connection = RethinkDB.r.connection().hostname(HOST).port(PORT).connect();
     }
 
     public List<Horario> disponibilidad(Horario horarioConsulta) {
-        String[] servicios = { "Peluqueria", "Paseo" };
+        String[] servicios = { "peluqueria", "paseo" };
         int a1;
         int a2;
         int m1;
@@ -50,8 +51,7 @@ public class DataBaseConnection {
         a2 = c.get(Calendar.YEAR);
         m2 = c.get(Calendar.MONTH) + 1;
         d2 = c.get(Calendar.DAY_OF_MONTH);
-
-        connection = createConnection();
+        createConnection();
 
         ArrayList<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO)
                 .filter(horario -> horario.getField("tiendaCanina").eq(horarioConsulta.getTiendaCanina()))
@@ -60,17 +60,17 @@ public class DataBaseConnection {
                 .filter(horario -> horario.g("fi").during(r.time(a1, m1, d1, "Z"), r.time(a2, m2, d2, "Z")))
                 .filter(horario -> horario.g(RESERVA_LABEL).eq(null)).orderBy("fi").run(connection, Horario.class);
         ArrayList<Horario> l = new ArrayList<>();
-
         for (int i = 0; i < query.size(); i++) {
             l.add(Util.convertToPojo(query.get(i), Optional.of(Horario.class)));
         }
+        connection.close();
 
         return l;
     }
 
     public Cliente buscarCliente(String id) {
 
-        connection = createConnection();
+        createConnection();
         Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("id").eq(id))
                 .run(connection, Cliente.class);
 
@@ -79,33 +79,36 @@ public class DataBaseConnection {
         while (query.hasNext()) {
             tiendaCanina = query.next();
         }
+        connection.close();
         return tiendaCanina;
     }
 
     public Horario buscarHorario(String id) {
         Horario horario = null;
-        connection = createConnection();
+        createConnection();
         Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO).filter(hora -> hora.getField("id").eq(id))
                 .run(connection, Horario.class);
         while (query.hasNext()) {
             horario = query.next();
         }
+        connection.close();
         return horario;
     }
 
     public Reserva buscarReserva(String id) {
         Reserva reserva = null;
-        connection = createConnection();
-        Cursor<Reserva> query = r.db(DB_NAME).table(RESERVA_LABEL).filter(res -> res.getField("id").eq(id))
+        createConnection();
+        Cursor<Reserva> query = r.db(DB_NAME).table(TABLE_RESERVA).filter(res -> res.getField("id").eq(id))
                 .run(connection, Reserva.class);
         while (query.hasNext()) {
             reserva = query.next();
         }
+        connection.close();
         return reserva;
     }
 
     public void actualizarHorario(Horario horario) {
-        connection = createConnection();
+        createConnection();
         r.db(DB_NAME).table(TABLE_HORARIO).get(horario.getId()).update(r.hashMap(RESERVA_LABEL,
                 // update null horario
                 r.hashMap("cliente", horario.getReserva().getCliente())
@@ -113,14 +116,15 @@ public class DataBaseConnection {
                         .with("comentario", horario.getReserva().getComentario())
                         .with("razaMascota", horario.getReserva().getRazaMascota())))
                 .run(connection);
+        connection.close();
     }
 
     public Horario insertarReserva(Horario horario) {
         OffsetDateTime nowDateTime = OffsetDateTime.now();
         nowDateTime = nowDateTime.plusDays(1);
-        connection = createConnection();
+        createConnection();
 
-        HashMap<String, Object> insert = r.db(DB_NAME).table(RESERVA_LABEL)
+        HashMap<String, Object> insert = r.db(DB_NAME).table(TABLE_RESERVA)
                 .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with("cliente", horario.getReserva().getCliente())
                         .with("nombreMascota", horario.getReserva().getNombreMascota())
                         .with("comentario", horario.getReserva().getComentario())
@@ -128,28 +132,20 @@ public class DataBaseConnection {
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
         horario.getReserva().setId(llaves.get(0));
-        return horario;
-    }
-
-    public Horario consultarReserva(String id) {
-        connection = createConnection();
-        Cursor<Horario> c = r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField("id").eq(id)).run(connection,
-                Horario.class);
-        Horario horario = null;
-        for (Horario o : c) {
-            horario = o;
-        }
+        connection.close();
         return horario;
     }
 
     public void eliminarReserva(Reserva reserva) {
-        connection = createConnection();
-        r.db(DB_NAME).table(RESERVA_LABEL).get(reserva.getId()).delete().run(connection);
+        createConnection();
+        r.db(DB_NAME).table(TABLE_RESERVA).get(reserva.getId()).delete().run(connection);
+        connection.close();
     }
 
     public void cancelarReserva(String id) {
-        connection = createConnection();
+        createConnection();
         r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField("id").eq(id))
                 .update(r.hashMap(RESERVA_LABEL, null)).run(connection);
+        connection.close();
     }
 }

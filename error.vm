@@ -1,0 +1,54 @@
+<html>
+<body>
+	<tbody>
+    	<tr><td height="20"></td></tr>
+    	<tr>
+        	<td align="center">
+            	<table style="font-family:'Poppins',sans-serif" width="600px" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" align="center">
+                	<tbody>
+                    <tr>
+                        <td width="20"></td>
+                        <td align="center">
+                            <table id="m_1178051568808726804order" style="background-color:white;margin:0 auto;padding:0" width="600px" cellspacing="30" cellpadding="20" border="0" align="center">
+                                <tbody>
+                                    <tr>
+                                        <td align="left">
+                                            <img src="https://raw.githubusercontent.com/mariahv9/ReyCanino_ARSW/master/resources/Logo.png" alt="" class="CToWUd" width="100px" height="100px">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span style="width:622px;height:144px;font-family:'Poppins',sans-serif;font-size:52px;font-weight:600;font-stretch:normal;font-style:normal;line-height:1.29;letter-spacing:-2.63px;color:#332927">Resumen de su reserva
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p style="font-family:'Poppins',sans-serif;font-size:24px;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#332927">$user,<br>
+                                            </p><p style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#706967">Ops! Ocurrio un error con tu reserva.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#706967">El horario que tratabas de reservar ya se encuentra ocupado.</p>
+                                            <p style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;color:#706967">Te invitamos a revisar otro horario disponible.</p>
+                                        </td>
+                                    </tr>
+
+
+                                    <td colspan="2" align="center">
+                                        <a href="https://reycanino.herokuapp.com/" style="border:solid 2px #f2f2f2;padding:10px;width:500px;padding:10px 0;text-decoration:none;display:block;text-align:center;border-radius:15px;background-color:#ffffff;padding-left:5px;padding-right:5px;font-family:'Poppins',sans-serif;font-size:30px;font-weight:normal;color:#706967;font-stretch:normal;font-style:normal;line-height:normal;letter-spacing:normal;border-radius:30px;border-color: #000;" target="_blank">
+                                            <img src="https://raw.githubusercontent.com/mariahv9/ReyCanino_ARSW/master/resources/Logo.png" alt="s" style="width:40px;height:40px;margin-right:10px;object-fit:contain" class="CToWUd">Buscar un nuevo horario</a>
+                                    </td>
+                                                            
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+	</tbody>
+</body>
+</html>
