@@ -148,4 +148,18 @@ public class DataBaseConnection {
                 .update(r.hashMap(RESERVA_LABEL, null)).run(connection);
         connection.close();
     }
+
+    public Cliente login(Cliente cliente) {
+        createConnection();
+        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente")
+                .filter(cl -> cl.getField("correo").eq(cliente.getCorreo()))
+                .filter(cl -> cl.getField("contrasena").eq(cliente.getPsw())).run(connection, Cliente.class);
+        Cliente clienteLogin = null;
+
+        while (query.hasNext()) {
+            clienteLogin = query.next();
+        }
+        connection.close();
+        return clienteLogin;
+    }
 }

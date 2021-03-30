@@ -57,4 +57,8 @@ public class ReyCaninoService {
         return dbService.buscarCliente(cliente);
     }
 
+    public Cliente login(Cliente cliente) {
+        return dbService.login(cliente);
+    }
+
 }

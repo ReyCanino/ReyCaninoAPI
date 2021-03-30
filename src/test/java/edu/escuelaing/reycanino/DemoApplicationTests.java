@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import edu.escuelaing.reycanino.model.Cliente;
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.model.Reserva;
 import edu.escuelaing.reycanino.rabbit.SenderRMQ;
@@ -154,5 +155,21 @@ class DemoApplicationTests {
 		Exception e = new ReyCaninoException("Mensaje de prueba");
 		System.out.println(e.getLocalizedMessage());
 		assertTrue(true);
+	}
+
+	@Test
+	void testLogin() throws Exception {
+		String url = "/reyCanino/login";
+		Cliente anObject = new Cliente();
+		anObject.setCorreo("mafehv1999@hotmail.com");
+		anObject.setPsw("03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4");
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(anObject);
+
+		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+				.andExpect(status().isAccepted());
 	}
 }
