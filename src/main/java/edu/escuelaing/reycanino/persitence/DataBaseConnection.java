@@ -162,4 +162,21 @@ public class DataBaseConnection {
         connection.close();
         return clienteLogin;
     }
+
+    public Horario agregarHorario(Horario horario){
+        OffsetDateTime nowDateTime = OffsetDateTime.now();
+        OffsetDateTime endDateTime = nowDateTime.plusHours(1);
+        createConnection();
+
+        HashMap<String, Object> insert = r.db(DB_NAME).table(TABLE_HORARIO)
+                .insert(r.array(r.hashMap("ff", endDateTime).with("fi", nowDateTime)
+                        .with("reserva", horario.getReserva())
+                        .with("servicio", horario.getServicio())
+                        .with("tiendaCanina", horario.getTiendaCanina()).with(TABLE_HORARIO, horario.getId())))
+                .run(connection);
+        ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
+        System.out.println(llaves.get(0));
+        connection.close();
+        return horario;
+    }
 }

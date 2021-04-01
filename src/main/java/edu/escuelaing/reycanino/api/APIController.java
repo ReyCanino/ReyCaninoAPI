@@ -100,5 +100,15 @@ public class APIController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping(value = "/horario/agregar")
+    public ResponseEntity<Horario> agregarHorario(@RequestBody Horario horario){
+        try {
+            services.agregarHorario(horario);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
