@@ -27,6 +27,9 @@ content-type: application/json
 ###Consultar reserva
 GET http://localhost:8080/reyCanino/consultar/97816b1c-33e7-4403-b83f-4ba7bdd4d583
 
+###Consultar horario
+GET http://localhost:8080/reyCanino/horario/038e2c41-e374-4770-9331-6861550d9427
+
 
 ###Login
 POST http://localhost:8080/reyCanino/login/

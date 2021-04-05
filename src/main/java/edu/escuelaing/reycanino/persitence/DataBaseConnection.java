@@ -95,6 +95,18 @@ public class DataBaseConnection {
         return horario;
     }
 
+    public List<Horario> buscarHorarioCliente(String id) {
+        List<Horario> horario = new ArrayList<>();
+        createConnection();
+        Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO)
+                .filter(res -> res.getField("reserva").getField("cliente").eq(id)).run(connection, Horario.class);
+        while (query.hasNext()) {
+            horario.add(query.next());
+        }
+        connection.close();
+        return horario;
+    }
+
     public Reserva buscarReserva(String id) {
         Reserva reserva = null;
         createConnection();
