@@ -104,6 +104,12 @@ class DemoApplicationTests {
 	}
 
 	@Test
+	void testConsultarHorarioCliente() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/horario/038e2c41-e374-4770-9331-6861550d9427")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
 	void testConsultarReservar() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/consultar/de3fd7e6-1713-4d9b-9ad7-9559168e6178")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
