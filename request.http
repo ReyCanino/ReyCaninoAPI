@@ -25,7 +25,7 @@ content-type: application/json
 
 
 ###Consultar reserva
-GET http://localhost:8080/reyCanino/consultar/97816b1c-33e7-4403-b83f-4ba7bdd4d583
+GET http://localhost:8080/reyCanino/consultar/de3fd7e6-1713-4d9b-9ad7-9559168e6178
 
 
 ###Login
@@ -36,3 +36,7 @@ content-type: application/json
     "correo":"mafehv1999@hotmail.com",
     "psw":"03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
 }
+
+
+### horario cliente
+GET http://localhost:8080/reyCanino/horario/038e2c41-e374-4770-9331-6861550d9427	
