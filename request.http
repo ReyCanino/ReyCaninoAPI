@@ -23,6 +23,9 @@ content-type: application/json
     "tiendaCanina":"f27d9717-9f4c-4ad2-ae36-8e9117b3848e"
 }
 
+###Confirmar
+GET http://localhost:8080/reyCanino/confirmar/de3fd7e6-1713-4d9b-9ad7-9559168e6178
+
 
 ###Consultar reserva
 GET http://localhost:8080/reyCanino/consultar/de3fd7e6-1713-4d9b-9ad7-9559168e6178
