@@ -30,8 +30,8 @@ GET http://localhost:8080/reyCanino/consultar/97816b1c-33e7-4403-b83f-4ba7bdd4d5
 ###Consultar horario
 GET http://localhost:8080/reyCanino/horario/038e2c41-e374-4770-9331-6861550d9427
 
-### Consultar cliente
-GET http://localhost:8080/reyCanino/cliente/0a60173e-276b-475a-96c2-697f072dcac0	
+### Consultar horario Admin
+GET http://localhost:8080/reyCanino/horarioAdmin/f27d9717-9f4c-4ad2-ae36-8e9117b3848e
 
 
 ###Login
