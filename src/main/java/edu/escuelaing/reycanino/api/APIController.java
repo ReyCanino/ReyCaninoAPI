@@ -1,26 +1,26 @@
 package edu.escuelaing.reycanino.api;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import edu.escuelaing.reycanino.model.Cliente;
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.services.ReyCaninoService;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-@CrossOrigin(origins = { "http://localhost:3000", "https://rey-canino.vercel.app/" })
+@CrossOrigin(origins = { "http://localhost:3000", "https://reycanino.vercel.app" })
 @RestController
 @RequestMapping(value = "/reyCanino")
 public class APIController {
