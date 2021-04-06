@@ -81,13 +81,8 @@ public class APIController {
 
     @GetMapping(value = "/consultar/{id}")
     public ResponseEntity<Horario> consultarReserva(@PathVariable() String id) {
-        try {
-            Horario horario = services.consultarReserva(id);
-            return new ResponseEntity<>(horario, HttpStatus.OK);
-        } catch (Exception e) {
-            Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        Horario horario = services.consultarReserva(id);
+        return new ResponseEntity<>(horario, HttpStatus.OK);
     }
 
     @GetMapping(value = "/horario/{id}")
