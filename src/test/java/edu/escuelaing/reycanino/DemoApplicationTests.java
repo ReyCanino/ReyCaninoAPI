@@ -97,7 +97,7 @@ class DemoApplicationTests {
 		Cliente cliente = new Cliente();
 		anObject.setCorreo("mafehv1999@hotmail.com");
 		anObject.setPsw("655e786674d9d3e77bc05ed1de37b4b6bc89f788829f9f3c679e7687b410c89b");
-		anObject.setDireccion("Cll 1 #13-12");
+		anObject.setDireccion("Cll 1 #13-11");
 		anObject.setNombre("Prueba");
 		anObject.setTelefono("1234567");
 		anObject.setTipo("regular");
