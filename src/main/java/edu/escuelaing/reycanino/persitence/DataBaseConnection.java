@@ -96,6 +96,19 @@ public class DataBaseConnection {
         return horario;
     }
 
+    public List<Cliente> buscarTiendas() {
+        List<Cliente> clientes = new ArrayList<>();
+        createConnection();
+        
+        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("tipo").eq("admin"))
+            .run(connection, Cliente.class);
+        while (query.hasNext()) {
+            clientes.add(query.next());
+        }
+        connection.close();
+        return clientes;
+    }
+
     public List<Horario> buscarHorarioCliente(String id) {
         List<Horario> horario = new ArrayList<>();
         createConnection();

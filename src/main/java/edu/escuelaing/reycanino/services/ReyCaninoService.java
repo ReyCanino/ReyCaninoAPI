@@ -47,6 +47,10 @@ public class ReyCaninoService {
         return dbService.buscarHorarioCliente(id);
     }
 
+    public List<Cliente> consultarTiendas() {
+        return dbService.buscarTiendas();
+    }
+
     public List<Horario> consultarHorarioAdmin(String id) {
         return dbService.buscarHorarioAdmin(id);
     }

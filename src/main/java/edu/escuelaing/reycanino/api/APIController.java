@@ -96,6 +96,11 @@ public class APIController {
         }
     }
 
+    @GetMapping(value = "/tiendas")
+    public ResponseEntity<List<Cliente>> consultarTiendas() {
+        return new ResponseEntity<>(services.consultarTiendas(), HttpStatus.OK);
+    }
+
     @GetMapping(value = "/horarioAdmin/{id}")
     public ResponseEntity<List<Horario>> consultarHorarioAdmin(@PathVariable() String id) {
         return new ResponseEntity<>(services.consultarHorarioAdmin(id), HttpStatus.OK);
