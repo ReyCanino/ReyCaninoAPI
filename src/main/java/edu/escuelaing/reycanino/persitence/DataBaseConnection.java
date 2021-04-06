@@ -68,10 +68,12 @@ public class DataBaseConnection {
         return l;
     }
 
+    String cliente = "cliente";
+
     public Cliente buscarCliente(String id) {
 
         createConnection();
-        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("id").eq(id))
+        Cursor<Cliente> query = r.db(DB_NAME).table(cliente).filter(cliente -> cliente.getField("id").eq(id))
                 .run(connection, Cliente.class);
 
         Cliente tiendaCanina = null;
@@ -99,7 +101,7 @@ public class DataBaseConnection {
         List<Horario> horario = new ArrayList<>();
         createConnection();
         Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO)
-                .filter(res -> res.getField("reserva").getField("cliente").eq(id)).run(connection, Horario.class);
+                .filter(res -> res.getField("reserva").getField(cliente).eq(id)).run(connection, Horario.class);
         while (query.hasNext()) {
             horario.add(query.next());
         }
@@ -137,7 +139,7 @@ public class DataBaseConnection {
         createConnection();
 
         HashMap<String, Object> insert = r.db(DB_NAME).table(TABLE_RESERVA)
-                .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with("cliente", horario.getReserva().getCliente())
+                .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with(cliente, horario.getReserva().getCliente())
                         .with("nombreMascota", horario.getReserva().getNombreMascota())
                         .with("comentario", horario.getReserva().getComentario())
                         .with("raza", horario.getReserva().getRazaMascota()).with(TABLE_HORARIO, horario.getId())))
