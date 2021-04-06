@@ -17,8 +17,8 @@ public class ReyCaninoApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("rey-canino.vercel.app", "localhost").allowedMethods("GET",
-						"POST", "PUT", "DELETE");
+				registry.addMapping("/**").allowedOrigins("https://rey-canino.vercel.app/", "http://localhost:3000")
+						.allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
 		};
 	}
