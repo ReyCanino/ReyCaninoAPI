@@ -92,6 +92,26 @@ class DemoApplicationTests {
 	}
 
 	@Test
+	void testAdicionUsuario() throws Exception {
+		String url = "/reyCanino/usuarioAdd";
+		Cliente cliente = new Cliente();
+		anObject.setCorreo("mafehv1999@hotmail.com");
+		anObject.setPsw("655e786674d9d3e77bc05ed1de37b4b6bc89f788829f9f3c679e7687b410c89b");
+		anObject.setDireccion("Cll 1 #13-12");
+		anObject.setNombre("Prueba");
+		anObject.setTelefono("1234567");
+		anObject.setTipo("regular");
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(anObject);
+
+		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+				.andExpect(status().isOk());
+	}
+
+	@Test
 	void testConfirmarReservar() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/confirmar/021a4c42-1335-42a0-9b55-f4a44825f60a")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound());

@@ -49,6 +49,17 @@ public class APIController {
         }
     }
 
+    @PostMapping(value = "/usuarioAdd")
+    public ResponseEntity<String> usuarioAdicion(@RequestBody Cliente cliente) {
+        try {
+            services.usuarioAdicion(cliente);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping(value = "/confirmar/{reserva}")
     public RedirectView confirmacion(@PathVariable() String reserva) {
         try {

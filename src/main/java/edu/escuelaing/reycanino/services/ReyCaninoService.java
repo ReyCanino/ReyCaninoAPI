@@ -29,6 +29,10 @@ public class ReyCaninoService {
         return sender.reservar(horario);
     }
 
+    public String usuarioAdicion(Cliente cliente) {
+        return dbService.insertarCliente(cliente);
+    }
+
     public String confirmar(String id) throws ReyCaninoException {
         Reserva reserva = dbService.buscarReserva(id);
         OffsetDateTime now = OffsetDateTime.now();

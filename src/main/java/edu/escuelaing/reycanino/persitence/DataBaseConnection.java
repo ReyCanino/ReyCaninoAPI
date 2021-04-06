@@ -26,6 +26,7 @@ public class DataBaseConnection {
     private static final String DB_NAME = "ReyCanino";
     private static final String TABLE_HORARIO = "Horario";
     private static final String TABLE_RESERVA = "Reserva";
+    private static final String TABLE_CLIENTE = "Cliente";
     private static final String RESERVA_LABEL = "reserva";
     private static final String CLIENTE_LABEL = "cliente";
     private static final int PORT = 32769;
@@ -173,6 +174,22 @@ public class DataBaseConnection {
         horario.getReserva().setId(llaves.get(0));
         connection.close();
         return horario;
+    }
+
+    public Cliente insertarCliente(Cliente cliente) {
+        createConnection();
+        HashMap<String, Object> insert = r.db(DB_NAME).table(TABLE_CLIENTE)
+                .insert(r.array(r.hashMap("contrasena", cliente.getPsw())
+                    .with("correo", cliente.getCorreo())
+                    .with("direccion", cliente.getDireccion())
+                    .with("nombre", cliente.getNombre())
+                    .with("telefono", cliente.getTelefono())
+                    .with("tipo", cliente.getTipo())
+                .run(connection);
+        ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
+        cliente.getReserva().setId(llaves.get(0));
+        connection.close();
+        return cliente;
     }
 
     public void eliminarReserva(Reserva reserva) {
