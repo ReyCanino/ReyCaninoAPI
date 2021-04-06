@@ -27,6 +27,7 @@ public class DataBaseConnection {
     private static final String TABLE_HORARIO = "Horario";
     private static final String TABLE_RESERVA = "Reserva";
     private static final String RESERVA_LABEL = "reserva";
+    private static final String CLIENTE_LABEL = "cliente";
     private static final int PORT = 32769;
 
     private void createConnection() {
@@ -90,6 +91,19 @@ public class DataBaseConnection {
                 .run(connection, Horario.class);
         while (query.hasNext()) {
             horario = query.next();
+        }
+        connection.close();
+        return horario;
+    }
+
+    public List<Horario> buscarHorarioCliente(String id) {
+        List<Horario> horario = new ArrayList<>();
+        createConnection();
+        Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO)
+                .filter(res -> res.getField(RESERVA_LABEL).getField(CLIENTE_LABEL).eq(id))
+                .run(connection, Horario.class);
+        while (query.hasNext()) {
+            horario.add(query.next());
         }
         connection.close();
         return horario;

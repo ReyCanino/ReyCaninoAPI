@@ -43,6 +43,10 @@ public class ReyCaninoService {
         return dbService.buscarHorario(id);
     }
 
+    public List<Horario> consultarHorario(String id) {
+        return dbService.buscarHorarioCliente(id);
+    }
+
     public String cancelarReserva(String id) {
         Horario horario = dbService.buscarHorario(id);
         if (horario.getReserva() != null && horario.getFi().isAfter(OffsetDateTime.now())) {
