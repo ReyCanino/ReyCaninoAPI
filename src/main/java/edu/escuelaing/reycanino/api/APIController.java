@@ -97,8 +97,8 @@ public class APIController {
     }
 
     @GetMapping(value = "/tiendas")
-    public ResponseEntity<List<Tiendas>> consultarTiendas(@PathVariable() String id) {
-        return new ResponseEntity<>(services.buscarTiendas(id), HttpStatus.OK);
+    public ResponseEntity<List<Cliente>> consultarTiendas() {
+        return new ResponseEntity<>(services.consultarTiendas(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/horarioAdmin/{id}")
