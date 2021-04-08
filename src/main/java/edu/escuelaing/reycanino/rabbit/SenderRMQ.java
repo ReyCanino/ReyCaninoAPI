@@ -47,14 +47,10 @@ public class SenderRMQ {
 		Channel channel = ConnectionRMQ.create();
 		try {
 			channel.basicPublish("", ConfigurationRMQ.QUEUE_NAME, null, message.getBytes());
-		} catch (IOException e) {
+			channel.close();
+		} catch (IOException | TimeoutException e) {
 			LOG.log(Level.INFO, e.getLocalizedMessage());
-		} finally {
-			try {
-				channel.close();
-			} catch (IOException | TimeoutException e) {
-				LOG.log(Level.INFO, e.getLocalizedMessage());
-			}
 		}
+
 	}
 }
