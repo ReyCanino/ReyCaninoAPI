@@ -73,4 +73,8 @@ public class ReyCaninoService {
         return dbService.login(cliente);
     }
 
+    public Horario agregarHorario(Horario horario){
+        return dbService.agregarHorario(horario);
+    }
+
 }
