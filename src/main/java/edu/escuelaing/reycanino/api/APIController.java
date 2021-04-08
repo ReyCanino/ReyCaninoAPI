@@ -53,10 +53,10 @@ public class APIController {
     public RedirectView confirmacion(@PathVariable() String reserva) {
         try {
             services.confirmar(reserva);
-            return new RedirectView("https://rey-canino.vercel.app/exito");
+            return new RedirectView("https://reycanino.vercel.app/exito");
         } catch (Exception e) {
             Logger.getLogger(APIController.class.getName()).log(Level.SEVERE, null, e);
-            return new RedirectView("https://rey-canino.vercel.app/fallo");
+            return new RedirectView("https://reycanino.vercel.app/fallo");
         }
     }
 
