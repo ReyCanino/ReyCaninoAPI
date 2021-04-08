@@ -34,7 +34,7 @@ public class ReyCaninoService {
         OffsetDateTime now = OffsetDateTime.now();
         if (reserva == null)
             throw new ReyCaninoException(ReyCaninoException.NO_EXISTE_RESERVA);
-        if (now.isBefore(reserva.getFechaLimite()))
+        if (now.isAfter(reserva.getFechaLimite()))
             throw new ReyCaninoException(ReyCaninoException.TIEMPO_EXPIRADO);
         return sender.confirmar(reserva);
     }
