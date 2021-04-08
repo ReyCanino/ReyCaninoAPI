@@ -26,6 +26,7 @@ public class DataBaseConnection {
     private static final String DB_NAME = "ReyCanino";
     private static final String TABLE_HORARIO = "Horario";
     private static final String TABLE_RESERVA = "Reserva";
+    private static final String HORARIO_LABEL = "horario";
     private static final String RESERVA_LABEL = "reserva";
     private static final String CLIENTE_LABEL = "cliente";
     private static final int PORT = 32769;
@@ -99,9 +100,9 @@ public class DataBaseConnection {
     public List<Cliente> buscarTiendas() {
         List<Cliente> clientes = new ArrayList<>();
         createConnection();
-        
+
         Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("tipo").eq("admin"))
-            .run(connection, Cliente.class);
+                .run(connection, Cliente.class);
         while (query.hasNext()) {
             clientes.add(query.next());
         }
@@ -167,7 +168,7 @@ public class DataBaseConnection {
                 .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with("cliente", horario.getReserva().getCliente())
                         .with("nombreMascota", horario.getReserva().getNombreMascota())
                         .with("comentario", horario.getReserva().getComentario())
-                        .with("raza", horario.getReserva().getRazaMascota()).with(TABLE_HORARIO, horario.getId())))
+                        .with("raza", horario.getReserva().getRazaMascota()).with(HORARIO_LABEL, horario.getId())))
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
         horario.getReserva().setId(llaves.get(0));
