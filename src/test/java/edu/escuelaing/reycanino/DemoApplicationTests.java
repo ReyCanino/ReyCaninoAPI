@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -171,5 +172,23 @@ class DemoApplicationTests {
 
 		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
 				.andExpect(status().isAccepted());
+	}
+	@Test
+	void testHorarioAgregar() throws Exception {
+		String url = "/reyCanino/horario/agregar";
+		Horario anObject = new Horario();
+		anObject.setServicio( "paseo");
+		anObject.setReserva(null);
+		anObject.setTiendaCanina("Patotas");
+
+
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(anObject);
+
+		mvc.perform(MockMvcRequestBuilders.get(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+				.andExpect(status().isOk());
 	}
 }
