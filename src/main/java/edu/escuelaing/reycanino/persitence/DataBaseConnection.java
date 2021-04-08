@@ -36,7 +36,7 @@ public class DataBaseConnection {
     }
 
     public List<Horario> disponibilidad(Horario horarioConsulta) {
-        String[] servicios = { "peluqueria", "paseo" };
+        String[] servicios = { "peluqueria", "veterinaria" };
         int a1;
         int a2;
         int m1;
