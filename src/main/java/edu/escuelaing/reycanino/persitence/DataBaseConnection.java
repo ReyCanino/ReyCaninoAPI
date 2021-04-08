@@ -29,6 +29,7 @@ public class DataBaseConnection {
     private static final String HORARIO_LABEL = "horario";
     private static final String RESERVA_LABEL = "reserva";
     private static final String CLIENTE_LABEL = "cliente";
+    private static final String Tienda_Canina = "tiendaCanina";
     private static final int PORT = 32769;
 
     private void createConnection() {
@@ -56,7 +57,7 @@ public class DataBaseConnection {
         createConnection();
 
         ArrayList<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO)
-                .filter(horario -> horario.getField("tiendaCanina").eq(horarioConsulta.getTiendaCanina()))
+                .filter(horario -> horario.getField(Tienda_Canina).eq(horarioConsulta.getTiendaCanina()))
                 .filter(horario -> horario.getField("servicio")
                         .eq(servicios[Integer.parseInt(horarioConsulta.getServicio()) - 1]))
                 .filter(horario -> horario.g("fi").during(r.time(a1, m1, d1, "Z"), r.time(a2, m2, d2, "Z")))
@@ -126,7 +127,7 @@ public class DataBaseConnection {
     public List<Horario> buscarHorarioAdmin(String id) {
         List<Horario> horario = new ArrayList<>();
         createConnection();
-        Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField("tiendaCanina").eq(id))
+        Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField(Tienda_Canina).eq(id))
                 .run(connection, Horario.class);
         while (query.hasNext()) {
             horario.add(query.next());
@@ -212,10 +213,10 @@ public class DataBaseConnection {
                 .insert(r.array(r.hashMap("ff", endDateTime).with("fi", nowDateTime)
                         .with("reserva", horario.getReserva())
                         .with("servicio", horario.getServicio())
-                        .with("tiendaCanina", horario.getTiendaCanina()).with(TABLE_HORARIO, horario.getId())))
+                        .with(Tienda_Canina, horario.getTiendaCanina()).with(TABLE_HORARIO, horario.getId())))
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
-        System.out.println(llaves.get(0));
+
         connection.close();
         return horario;
     }
