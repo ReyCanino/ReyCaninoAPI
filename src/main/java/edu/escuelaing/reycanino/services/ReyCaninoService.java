@@ -34,13 +34,25 @@ public class ReyCaninoService {
         OffsetDateTime now = OffsetDateTime.now();
         if (reserva == null)
             throw new ReyCaninoException(ReyCaninoException.NO_EXISTE_RESERVA);
-        if (now.isBefore(reserva.getFechaLimite()))
+        if (now.isAfter(reserva.getFechaLimite()))
             throw new ReyCaninoException(ReyCaninoException.TIEMPO_EXPIRADO);
         return sender.confirmar(reserva);
     }
 
     public Horario consultarReserva(String id) {
         return dbService.buscarHorario(id);
+    }
+
+    public List<Horario> consultarHorario(String id) {
+        return dbService.buscarHorarioCliente(id);
+    }
+
+    public List<Cliente> consultarTiendas() {
+        return dbService.buscarTiendas();
+    }
+
+    public List<Horario> consultarHorarioAdmin(String id) {
+        return dbService.buscarHorarioAdmin(id);
     }
 
     public String cancelarReserva(String id) {

@@ -95,12 +95,30 @@ class DemoApplicationTests {
 	@Test
 	void testConfirmarReservar() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/confirmar/021a4c42-1335-42a0-9b55-f4a44825f60a")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound());
 	}
 
 	@Test
 	void testCancelarReservar() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cancelar/56fcb644-c656-4a99-97b0-561fd106de18")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
+	void testConsultarHorarioCliente() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/horario/038e2c41-e374-4770-9331-6861550d9427")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
+	void testConsultarTiendas() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/tiendas")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
+	void testConsultarHorarioAdmin() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/horarioAdmin/f27d9717-9f4c-4ad2-ae36-8e9117b3848e")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 

@@ -26,7 +26,9 @@ public class DataBaseConnection {
     private static final String DB_NAME = "ReyCanino";
     private static final String TABLE_HORARIO = "Horario";
     private static final String TABLE_RESERVA = "Reserva";
+    private static final String HORARIO_LABEL = "horario";
     private static final String RESERVA_LABEL = "reserva";
+    private static final String CLIENTE_LABEL = "cliente";
     private static final int PORT = 32769;
 
     private void createConnection() {
@@ -34,7 +36,7 @@ public class DataBaseConnection {
     }
 
     public List<Horario> disponibilidad(Horario horarioConsulta) {
-        String[] servicios = { "peluqueria", "paseo" };
+        String[] servicios = { "peluqueria", "veterinaria" };
         int a1;
         int a2;
         int m1;
@@ -95,6 +97,44 @@ public class DataBaseConnection {
         return horario;
     }
 
+    public List<Cliente> buscarTiendas() {
+        List<Cliente> clientes = new ArrayList<>();
+        createConnection();
+
+        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("tipo").eq("admin"))
+                .run(connection, Cliente.class);
+        while (query.hasNext()) {
+            clientes.add(query.next());
+        }
+        connection.close();
+        return clientes;
+    }
+
+    public List<Horario> buscarHorarioCliente(String id) {
+        List<Horario> horario = new ArrayList<>();
+        createConnection();
+        Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO)
+                .filter(res -> res.getField(RESERVA_LABEL).getField(CLIENTE_LABEL).eq(id))
+                .run(connection, Horario.class);
+        while (query.hasNext()) {
+            horario.add(query.next());
+        }
+        connection.close();
+        return horario;
+    }
+
+    public List<Horario> buscarHorarioAdmin(String id) {
+        List<Horario> horario = new ArrayList<>();
+        createConnection();
+        Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField("tiendaCanina").eq(id))
+                .run(connection, Horario.class);
+        while (query.hasNext()) {
+            horario.add(query.next());
+        }
+        connection.close();
+        return horario;
+    }
+
     public Reserva buscarReserva(String id) {
         Reserva reserva = null;
         createConnection();
@@ -128,7 +168,7 @@ public class DataBaseConnection {
                 .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with("cliente", horario.getReserva().getCliente())
                         .with("nombreMascota", horario.getReserva().getNombreMascota())
                         .with("comentario", horario.getReserva().getComentario())
-                        .with("raza", horario.getReserva().getRazaMascota()).with(TABLE_HORARIO, horario.getId())))
+                        .with("raza", horario.getReserva().getRazaMascota()).with(HORARIO_LABEL, horario.getId())))
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
         horario.getReserva().setId(llaves.get(0));
