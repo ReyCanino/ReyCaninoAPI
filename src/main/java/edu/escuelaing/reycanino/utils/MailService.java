@@ -49,7 +49,7 @@ public class MailService {
 					message.setFrom(SENDER);
 					message.setSubject("¡Confirma tu reserva!");
 
-					String url = "http://reycanino.herokuapp.com/reyCanino/confirmar/";
+					String url = "https://reycanino-api.herokuapp.com/reyCanino/confirmar/";
 					url += horario.getReserva().getId();
 
 					String dateAux = "";
