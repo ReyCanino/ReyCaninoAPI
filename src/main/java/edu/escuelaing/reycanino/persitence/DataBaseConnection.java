@@ -169,7 +169,8 @@ public class DataBaseConnection {
                 .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with("cliente", horario.getReserva().getCliente())
                         .with("nombreMascota", horario.getReserva().getNombreMascota())
                         .with("comentario", horario.getReserva().getComentario())
-                        .with("razaMascota", horario.getReserva().getRazaMascota())))
+                        .with("razaMascota", horario.getReserva().getRazaMascota())
+                        .with(HORARIO_LABEL, horario.getId())))
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
         horario.getReserva().setId(llaves.get(0));
@@ -209,12 +210,11 @@ public class DataBaseConnection {
         OffsetDateTime endDateTime = nowDateTime.plusHours(1);
         createConnection();
 
-        HashMap<String, Object> insert = r.db(DB_NAME).table(TABLE_HORARIO)
+        r.db(DB_NAME).table(TABLE_HORARIO)
                 .insert(r.array(r.hashMap("ff", endDateTime).with("fi", nowDateTime)
                         .with("reserva", horario.getReserva()).with("servicio", horario.getServicio())
                         .with(Tienda_Canina, horario.getTiendaCanina()).with(TABLE_HORARIO, horario.getId())))
                 .run(connection);
-        ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
 
         connection.close();
         return horario;
