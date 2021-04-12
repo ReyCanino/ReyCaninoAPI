@@ -34,7 +34,7 @@ public class ReyCaninoService {
         OffsetDateTime now = OffsetDateTime.now();
         if (reserva == null)
             throw new ReyCaninoException(ReyCaninoException.NO_EXISTE_RESERVA);
-        if (now.isBefore(reserva.getFechaLimite()))
+        if (now.isAfter(reserva.getFechaLimite()))
             throw new ReyCaninoException(ReyCaninoException.TIEMPO_EXPIRADO);
         return sender.confirmar(reserva);
     }
@@ -45,6 +45,10 @@ public class ReyCaninoService {
 
     public List<Horario> consultarHorario(String id) {
         return dbService.buscarHorarioCliente(id);
+    }
+
+    public List<Cliente> consultarTiendas() {
+        return dbService.buscarTiendas();
     }
 
     public List<Horario> consultarHorarioAdmin(String id) {
@@ -67,6 +71,10 @@ public class ReyCaninoService {
 
     public Cliente login(Cliente cliente) {
         return dbService.login(cliente);
+    }
+
+    public Horario agregarHorario(Horario horario){
+        return dbService.agregarHorario(horario);
     }
 
 }
