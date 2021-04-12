@@ -154,7 +154,8 @@ public class DataBaseConnection {
                 .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with("cliente", horario.getReserva().getCliente())
                         .with("nombreMascota", horario.getReserva().getNombreMascota())
                         .with("comentario", horario.getReserva().getComentario())
-                        .with("raza", horario.getReserva().getRazaMascota()).with(TABLE_HORARIO, horario.getId())))
+                        .with("razaMascota", horario.getReserva().getRazaMascota())
+                        .with(TABLE_HORARIO, horario.getId())))
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
         horario.getReserva().setId(llaves.get(0));
