@@ -213,7 +213,7 @@ public class DataBaseConnection {
         r.db(DB_NAME).table(TABLE_HORARIO)
                 .insert(r.array(r.hashMap("ff", endDateTime).with("fi", nowDateTime)
                         .with("reserva", horario.getReserva()).with("servicio", horario.getServicio())
-                        .with(Tienda_Canina, horario.getTiendaCanina()).with(TABLE_HORARIO, horario.getId())))
+                        .with(Tienda_Canina, horario.getTiendaCanina())))
                 .run(connection);
 
         connection.close();
