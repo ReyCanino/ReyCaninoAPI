@@ -26,6 +26,7 @@ public class DataBaseConnection {
     private static final String DB_NAME = "ReyCanino";
     private static final String TABLE_HORARIO = "Horario";
     private static final String TABLE_RESERVA = "Reserva";
+    private static final String TABLE_CLIENTE = "Cliente";
     private static final String HORARIO_LABEL = "horario";
     private static final String RESERVA_LABEL = "reserva";
     private static final String CLIENTE_LABEL = "cliente";
@@ -74,7 +75,7 @@ public class DataBaseConnection {
     public Cliente buscarCliente(String id) {
 
         createConnection();
-        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("id").eq(id))
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE).filter(cliente -> cliente.getField("id").eq(id))
                 .run(connection, Cliente.class);
 
         Cliente tiendaCanina = null;
@@ -102,8 +103,8 @@ public class DataBaseConnection {
         List<Cliente> clientes = new ArrayList<>();
         createConnection();
 
-        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("tipo").eq("admin"))
-                .run(connection, Cliente.class);
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE)
+                .filter(cliente -> cliente.getField("tipo").eq("admin")).run(connection, Cliente.class);
         while (query.hasNext()) {
             clientes.add(query.next());
         }
@@ -193,7 +194,7 @@ public class DataBaseConnection {
 
     public Cliente login(Cliente cliente) {
         createConnection();
-        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente")
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE)
                 .filter(cl -> cl.getField("correo").eq(cliente.getCorreo()))
                 .filter(cl -> cl.getField("contrasena").eq(cliente.getPsw())).run(connection, Cliente.class);
         Cliente clienteLogin = null;
@@ -218,5 +219,14 @@ public class DataBaseConnection {
 
         connection.close();
         return horario;
+    }
+
+    public void agregarCliente(Cliente cliente) {
+        createConnection();
+        r.db(DB_NAME).table(TABLE_CLIENTE)
+                .insert(r.array(r.hashMap("contrasena", cliente.getPsw()).with("correo", cliente.getCorreo())
+                        .with("direccion", cliente.getDireccion()).with("nombre", cliente.getNombre())
+                        .with("telefono", cliente.getTelefono()).with("tipo", cliente.getTipo())))
+                .run(connection);
     }
 }
