@@ -126,7 +126,7 @@ public class APIController {
     @PostMapping(value = "/agregarCliente")
     public ResponseEntity<Horario> agregarCliente(@RequestBody Cliente cliente) {
         services.agregarCliente(cliente);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
 }

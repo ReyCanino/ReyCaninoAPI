@@ -207,4 +207,19 @@ class DemoApplicationTests {
 		mvc.perform(MockMvcRequestBuilders.get(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
 				.andExpect(status().isOk());
 	}
+
+	@Test
+	void testAgregarCliente() throws Exception {
+		String url = "/reyCanino/agregarCliente";
+		Cliente anObject = new Cliente();
+		anObject.setTipo("test");
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(anObject);
+
+		mvc.perform(MockMvcRequestBuilders.get(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+				.andExpect(status().isOk());
+	}
 }
