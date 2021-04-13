@@ -220,6 +220,6 @@ class DemoApplicationTests {
 		String requestJson = ow.writeValueAsString(anObject);
 
 		mvc.perform(MockMvcRequestBuilders.get(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
-				.andExpect(status().isOk());
+				.andExpect(status().isAccepted());
 	}
 }
