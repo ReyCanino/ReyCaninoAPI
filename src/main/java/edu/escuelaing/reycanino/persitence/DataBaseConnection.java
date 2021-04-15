@@ -207,12 +207,9 @@ public class DataBaseConnection {
     }
 
     public Horario agregarHorario(Horario horario) {
-        OffsetDateTime nowDateTime = OffsetDateTime.now();
-        OffsetDateTime endDateTime = nowDateTime.plusHours(1);
         createConnection();
-
         r.db(DB_NAME).table(TABLE_HORARIO)
-                .insert(r.array(r.hashMap("ff", endDateTime).with("fi", nowDateTime)
+                .insert(r.array(r.hashMap("ff", horario.getFf()).with("fi", horario.getFi())
                         .with("reserva", horario.getReserva()).with("servicio", horario.getServicio())
                         .with(Tienda_Canina, horario.getTiendaCanina())))
                 .run(connection);
