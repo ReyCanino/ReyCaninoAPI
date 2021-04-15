@@ -21,7 +21,7 @@ import edu.escuelaing.reycanino.model.Cliente;
 import edu.escuelaing.reycanino.model.Horario;
 import edu.escuelaing.reycanino.services.ReyCaninoService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "https://reycanino.vercel.app" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping(value = "/reyCanino")
 public class APIController {
