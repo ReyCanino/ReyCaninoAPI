@@ -26,6 +26,7 @@ public class DataBaseConnection {
     private static final String DB_NAME = "ReyCanino";
     private static final String TABLE_HORARIO = "Horario";
     private static final String TABLE_RESERVA = "Reserva";
+    private static final String TABLE_CLIENTE = "Cliente";
     private static final String HORARIO_LABEL = "horario";
     private static final String RESERVA_LABEL = "reserva";
     private static final String CLIENTE_LABEL = "cliente";
@@ -74,7 +75,7 @@ public class DataBaseConnection {
     public Cliente buscarCliente(String id) {
 
         createConnection();
-        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("id").eq(id))
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE).filter(cliente -> cliente.getField("id").eq(id))
                 .run(connection, Cliente.class);
 
         Cliente tiendaCanina = null;
@@ -102,8 +103,8 @@ public class DataBaseConnection {
         List<Cliente> clientes = new ArrayList<>();
         createConnection();
 
-        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente").filter(cliente -> cliente.getField("tipo").eq("admin"))
-                .run(connection, Cliente.class);
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE)
+                .filter(cliente -> cliente.getField("tipo").eq("admin")).run(connection, Cliente.class);
         while (query.hasNext()) {
             clientes.add(query.next());
         }
@@ -169,7 +170,8 @@ public class DataBaseConnection {
                 .insert(r.array(r.hashMap("fechaLimite", nowDateTime).with("cliente", horario.getReserva().getCliente())
                         .with("nombreMascota", horario.getReserva().getNombreMascota())
                         .with("comentario", horario.getReserva().getComentario())
-                        .with("raza", horario.getReserva().getRazaMascota()).with(HORARIO_LABEL, horario.getId())))
+                        .with("razaMascota", horario.getReserva().getRazaMascota())
+                        .with(HORARIO_LABEL, horario.getId())))
                 .run(connection);
         ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
         horario.getReserva().setId(llaves.get(0));
@@ -192,7 +194,7 @@ public class DataBaseConnection {
 
     public Cliente login(Cliente cliente) {
         createConnection();
-        Cursor<Cliente> query = r.db(DB_NAME).table("Cliente")
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE)
                 .filter(cl -> cl.getField("correo").eq(cliente.getCorreo()))
                 .filter(cl -> cl.getField("contrasena").eq(cliente.getPsw())).run(connection, Cliente.class);
         Cliente clienteLogin = null;
@@ -204,20 +206,27 @@ public class DataBaseConnection {
         return clienteLogin;
     }
 
-    public Horario agregarHorario(Horario horario){
+    public Horario agregarHorario(Horario horario) {
         OffsetDateTime nowDateTime = OffsetDateTime.now();
         OffsetDateTime endDateTime = nowDateTime.plusHours(1);
         createConnection();
 
-        HashMap<String, Object> insert = r.db(DB_NAME).table(TABLE_HORARIO)
+        r.db(DB_NAME).table(TABLE_HORARIO)
                 .insert(r.array(r.hashMap("ff", endDateTime).with("fi", nowDateTime)
-                        .with("reserva", horario.getReserva())
-                        .with("servicio", horario.getServicio())
-                        .with(Tienda_Canina, horario.getTiendaCanina()).with(TABLE_HORARIO, horario.getId())))
+                        .with("reserva", horario.getReserva()).with("servicio", horario.getServicio())
+                        .with(Tienda_Canina, horario.getTiendaCanina())))
                 .run(connection);
-        ArrayList<String> llaves = (ArrayList<String>) insert.get("generated_keys");
 
         connection.close();
         return horario;
+    }
+
+    public void agregarCliente(Cliente cliente) {
+        createConnection();
+        r.db(DB_NAME).table(TABLE_CLIENTE)
+                .insert(r.array(r.hashMap("contrasena", cliente.getPsw()).with("correo", cliente.getCorreo())
+                        .with("direccion", cliente.getDireccion()).with("nombre", cliente.getNombre())
+                        .with("telefono", cliente.getTelefono()).with("tipo", cliente.getTipo())))
+                .run(connection);
     }
 }

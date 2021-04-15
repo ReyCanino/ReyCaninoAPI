@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.nio.charset.Charset;
 import java.util.Date;
-import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -93,18 +92,6 @@ class DemoApplicationTests {
 	}
 
 	@Test
-	void testConfirmarReservar() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/confirmar/021a4c42-1335-42a0-9b55-f4a44825f60a")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound());
-	}
-
-	@Test
-	void testCancelarReservar() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cancelar/56fcb644-c656-4a99-97b0-561fd106de18")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-	}
-
-	@Test
 	void testConsultarHorarioCliente() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/horario/038e2c41-e374-4770-9331-6861550d9427")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
@@ -112,8 +99,8 @@ class DemoApplicationTests {
 
 	@Test
 	void testConsultarTiendas() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/tiendas")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/tiendas").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
 	}
 
 	@Test
@@ -124,19 +111,13 @@ class DemoApplicationTests {
 
 	@Test
 	void testConsultarReservar() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/consultar/de3fd7e6-1713-4d9b-9ad7-9559168e6178")
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/consultar/3f36d89b-dd0f-4d98-8625-2292959d39b7")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 	@Test
 	void testConsultarCliente() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cliente/038e2c41-e374-4770-9331-6861550d9427")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-	}
-
-	@Test
-	void testEliminarReserva() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cliente/021a4c42-1335-42a0-9b55-f4a44825f60a")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
@@ -191,15 +172,14 @@ class DemoApplicationTests {
 		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
 				.andExpect(status().isAccepted());
 	}
+
 	@Test
 	void testHorarioAgregar() throws Exception {
 		String url = "/reyCanino/horario/agregar";
 		Horario anObject = new Horario();
-		anObject.setServicio( "paseo");
+		anObject.setServicio("paseo");
 		anObject.setReserva(null);
 		anObject.setTiendaCanina("Patotas");
-
-
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -208,5 +188,20 @@ class DemoApplicationTests {
 
 		mvc.perform(MockMvcRequestBuilders.get(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
 				.andExpect(status().isOk());
+	}
+
+	@Test
+	void testAgregarCliente() throws Exception {
+		String url = "/reyCanino/agregarCliente";
+		Cliente anObject = new Cliente();
+		anObject.setTipo("test");
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(anObject);
+
+		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+				.andExpect(status().isAccepted());
 	}
 }

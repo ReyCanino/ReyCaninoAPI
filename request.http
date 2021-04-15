@@ -24,7 +24,7 @@ content-type: application/json
 }
 
 ###Confirmar
-GET http://localhost:8080/reyCanino/confirmar/8e4dbc26-02e5-448b-bbbb-40d4fe2eb0e3
+GET http://localhost:8080/reyCanino/confirmar/4aa88b71-4ae7-49c0-b262-56c057cef808
 
 ###Consultar reserva
 GET http://localhost:8080/reyCanino/consultar/de3fd7e6-1713-4d9b-9ad7-9559168e6178
