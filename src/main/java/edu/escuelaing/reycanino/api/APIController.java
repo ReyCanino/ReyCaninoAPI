@@ -1,5 +1,6 @@
 package edu.escuelaing.reycanino.api;
 
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,7 +120,6 @@ public class APIController {
 
     @PostMapping(value = "/horario/agregar")
     public ResponseEntity<Horario> agregarHorario(@RequestBody Horario horario){
-
         services.agregarHorario(horario);
         return new ResponseEntity<>(HttpStatus.OK);
     }
