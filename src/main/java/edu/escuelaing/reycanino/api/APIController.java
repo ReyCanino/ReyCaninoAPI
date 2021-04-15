@@ -116,7 +116,7 @@ public class APIController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping(value = "/horario/agregar")
+    @PostMapping(value = "/horario/agregar")
     public ResponseEntity<Horario> agregarHorario(@RequestBody Horario horario){
         services.agregarHorario(horario);
         return new ResponseEntity<>(HttpStatus.OK);
