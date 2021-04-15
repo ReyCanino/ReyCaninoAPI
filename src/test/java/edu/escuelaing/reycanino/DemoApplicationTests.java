@@ -186,7 +186,7 @@ class DemoApplicationTests {
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		String requestJson = ow.writeValueAsString(anObject);
 
-		mvc.perform(MockMvcRequestBuilders.get(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
+		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
 				.andExpect(status().isOk());
 	}
 
