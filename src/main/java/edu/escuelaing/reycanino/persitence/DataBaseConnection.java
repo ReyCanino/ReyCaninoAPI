@@ -207,12 +207,33 @@ public class DataBaseConnection {
 
     public Horario agregarHorario(Horario horario) {
         createConnection();
-        r.db(DB_NAME).table(TABLE_HORARIO)
-                .insert(r.array(r.hashMap("ff", horario.getFf()).with("fi", horario.getFi())
-                        .with("reserva", horario.getReserva()).with("servicio", horario.getServicio())
-                        .with(Tienda_Canina, horario.getTiendaCanina())))
-                .run(connection);
-
+        OffsetDateTime fechaFin = horario.getFf();
+        OffsetDateTime fechaIni = horario.getFi();
+        for (int i = 0; i < horario.getCantRepeticiones(); i++) {
+            String tipoRepeticiones = horario.getTipoRepeticion();
+            if (i > 0) {
+                switch (tipoRepeticiones) {
+                    case "Diaria":
+                        fechaIni = fechaIni.plusDays(1);
+                        fechaFin = fechaFin.plusDays(1);
+                        break;
+                    case "Semanal":
+                        fechaIni = fechaIni.plusWeeks(1);
+                        fechaFin = fechaFin.plusWeeks(1);
+                        break;
+                    case "Mensual":
+                        fechaIni = fechaIni.plusMonths(1);
+                        fechaFin = fechaFin.plusMonths(1);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            r.db(DB_NAME).table(TABLE_HORARIO)
+                    .insert(r.array(r.hashMap("ff", fechaFin).with("fi", fechaIni).with("reserva", horario.getReserva())
+                            .with("servicio", horario.getServicio()).with(Tienda_Canina, horario.getTiendaCanina())))
+                    .run(connection);
+        }
         connection.close();
         return horario;
     }
