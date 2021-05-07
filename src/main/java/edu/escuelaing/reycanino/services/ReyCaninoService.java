@@ -61,8 +61,12 @@ public class ReyCaninoService {
             dbService.cancelarReserva(id);
             return "Éxito";
         }
-
         return "Fallo";
+    }
+
+    public void cancelarHorario(String id) {
+        dbService.eliminarHorario(id);
+        
     }
 
     public Cliente consultarCliente(String cliente) {

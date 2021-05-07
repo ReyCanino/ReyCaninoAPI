@@ -96,4 +96,10 @@ class DemoApplicationTests {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/cliente/038e2c41-e374-4770-9331-6861550d9427")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
+
+	@Test
+	void testEliminarHorario() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/eliminar/4e660b66-5095-4fe6-aa2e-b42ea661128c")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
 }
