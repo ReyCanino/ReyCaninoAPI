@@ -11,15 +11,20 @@ public class Horario {
     private OffsetDateTime fi;
     private Date fechaConsulta;
     private Reserva reserva;
+    private String tipoRepeticion;
+    private int cantRepeticiones;
 
-    public Horario(String servicio, String id, OffsetDateTime ff, OffsetDateTime fi, Reserva reserva,
-            String tiendaCanina) {
+    public Horario(String servicio, String id, String tiendaCanina, OffsetDateTime ff, OffsetDateTime fi,
+            Date fechaConsulta, Reserva reserva, String tipoRepeticion, int cantRepeticiones) {
         this.servicio = servicio;
         this.id = id;
+        this.tiendaCanina = tiendaCanina;
         this.ff = ff;
         this.fi = fi;
+        this.fechaConsulta = fechaConsulta;
         this.reserva = reserva;
-        this.tiendaCanina = tiendaCanina;
+        this.tipoRepeticion = tipoRepeticion;
+        this.cantRepeticiones = cantRepeticiones;
     }
 
     public Date getFechaConsulta() {
@@ -81,11 +86,28 @@ public class Horario {
         this.reserva = reserva;
     }
 
+    public String getTipoRepeticion() {
+        return this.tipoRepeticion;
+    }
+
+    public void setTipoRepeticion(String tipoRepeticion) {
+        this.tipoRepeticion = tipoRepeticion;
+    }
+
+    public int getCantRepeticiones() {
+        return this.cantRepeticiones;
+    }
+
+    public void setCantRepeticiones(int cantRepeticiones) {
+        this.cantRepeticiones = cantRepeticiones;
+    }
+
     @Override
     public String toString() {
         return "{" + " servicio='" + getServicio() + "'" + ", id='" + getId() + "'" + ", tiendaCanina='"
                 + getTiendaCanina() + "'" + ", ff='" + getFf() + "'" + ", fi='" + getFi() + "'" + ", fechaConsulta='"
-                + getFechaConsulta() + "'" + ", reserva='" + getReserva() + "'" + "}";
+                + getFechaConsulta() + "'" + ", reserva='" + getReserva() + "'" + ", tipoRepeticion='"
+                + getTipoRepeticion() + "'" + ", cantRepeticiones='" + getCantRepeticiones() + "'" + "}";
     }
 
 }
