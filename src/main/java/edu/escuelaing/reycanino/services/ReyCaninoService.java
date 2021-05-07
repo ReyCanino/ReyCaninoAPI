@@ -65,10 +65,8 @@ public class ReyCaninoService {
     }
 
     public void cancelarHorario(String id) {
-        Horario horario = dbService.buscarHorario(id);
-        if (horario != null && horario.getFi().isAfter(OffsetDateTime.now())) {
-            dbService.eliminarHorario(id);
-        }
+        dbService.eliminarHorario(id);
+        
     }
 
     public Cliente consultarCliente(String cliente) {
