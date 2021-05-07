@@ -126,15 +126,14 @@ public class DataBaseConnection {
     }
 
     public List<Horario> buscarHorarioAdmin(String id) {
-        List<Horario> horario = new ArrayList<>();
         createConnection();
-        Cursor<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField(Tienda_Canina).eq(id))
-                .run(connection, Horario.class);
-        while (query.hasNext()) {
-            horario.add(query.next());
+        ArrayList<Horario> query = r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField(Tienda_Canina).eq(id)).orderBy("fi").run(connection, Horario.class);
+        ArrayList<Horario> l = new ArrayList<>();
+        for (int i = 0; i < query.size(); i++) {
+            l.add(Util.convertToPojo(query.get(i), Optional.of(Horario.class)));
         }
         connection.close();
-        return horario;
+        return l;
     }
 
     public Reserva buscarReserva(String id) {
