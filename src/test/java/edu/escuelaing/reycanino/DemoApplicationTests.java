@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.charset.Charset;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -177,9 +178,10 @@ class DemoApplicationTests {
 	void testHorarioAgregar() throws Exception {
 		String url = "/reyCanino/horario/agregar";
 		Horario anObject = new Horario();
-		anObject.setServicio("paseo");
-		anObject.setReserva(null);
-		anObject.setTiendaCanina("Patotas");
+		anObject.setServicio("veterinaria");
+		anObject.setTiendaCanina("f27d9717-9f4c-4ad2-ae36-8e9117b3848e");
+		anObject.setTipoRepeticion("Diaria");
+		anObject.setCantRepeticiones(1);
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
