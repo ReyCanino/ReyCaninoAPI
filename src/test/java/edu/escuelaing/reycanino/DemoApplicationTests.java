@@ -204,4 +204,16 @@ class DemoApplicationTests {
 		mvc.perform(MockMvcRequestBuilders.post(url).contentType(APPLICATION_JSON_UTF8).content(requestJson))
 				.andExpect(status().isAccepted());
 	}
+
+	@Test
+	void pantallasOK() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/confirmar/a4bd40c6-672e-41d5-a34a-d8c2d907c2fa")
+				.accept(MediaType.APPLICATION_JSON));
+	}
+
+	@Test
+	void pantallasNOOK() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/confirmar/a4bd40c6-672e-41d5-a34a-d8c2d907c2fa")
+				.accept(MediaType.APPLICATION_JSON));
+	}
 }
