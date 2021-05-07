@@ -64,13 +64,11 @@ public class ReyCaninoService {
         return "Fallo";
     }
 
-    public String cancelarHorario(String id) {
+    public void cancelarHorario(String id) {
         Horario horario = dbService.buscarHorario(id);
         if (horario != null && horario.getFi().isAfter(OffsetDateTime.now())) {
             dbService.eliminarHorario(id);
-            return "Éxito";
         }
-        return "Fallo";
     }
 
     public Cliente consultarCliente(String cliente) {
