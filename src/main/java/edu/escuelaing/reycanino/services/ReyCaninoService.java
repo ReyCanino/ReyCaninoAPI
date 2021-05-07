@@ -66,7 +66,7 @@ public class ReyCaninoService {
 
     public String cancelarHorario(String id) {
         Horario horario = dbService.buscarHorario(id);
-        if (horario.getReserva() != null && horario.getFi().isAfter(OffsetDateTime.now())) {
+        if (horario != null && horario.getFi().isAfter(OffsetDateTime.now())) {
             dbService.eliminarHorario(id);
             return "Éxito";
         }
