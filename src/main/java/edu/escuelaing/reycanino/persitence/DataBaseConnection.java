@@ -184,6 +184,12 @@ public class DataBaseConnection {
         connection.close();
     }
 
+    public void eliminarHorario(String id) {
+        createConnection();
+        r.db(DB_NAME).table(TABLE_HORARIO).get(id).delete().run(connection);
+        connection.close();
+    }
+
     public void cancelarReserva(String id) {
         createConnection();
         r.db(DB_NAME).table(TABLE_HORARIO).filter(res -> res.getField("id").eq(id))

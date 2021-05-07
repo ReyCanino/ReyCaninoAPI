@@ -61,7 +61,15 @@ public class ReyCaninoService {
             dbService.cancelarReserva(id);
             return "Éxito";
         }
+        return "Fallo";
+    }
 
+    public String cancelarHorario(String id) {
+        Horario horario = dbService.buscarHorario(id);
+        if (horario.getReserva() != null && horario.getFi().isAfter(OffsetDateTime.now())) {
+            dbService.eliminarHorario(id);
+            return "Éxito";
+        }
         return "Fallo";
     }
 
