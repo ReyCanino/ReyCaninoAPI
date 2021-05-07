@@ -215,16 +215,16 @@ public class DataBaseConnection {
             if (i > 0) {
                 switch (tipoRepeticiones) {
                     case "Diaria":
-                        fechaIni.plusDays(1);
-                        fechaFin.plusDays(1);
+                        fechaIni = fechaIni.plusDays(1);
+                        fechaFin = fechaFin.plusDays(1);
                         break;
                     case "Semanal":
-                        fechaIni.plusWeeks(1);
-                        fechaFin.plusWeeks(1);
+                        fechaIni = fechaIni.plusWeeks(1);
+                        fechaFin = fechaFin.plusWeeks(1);
                         break;
                     case "Mensual":
-                        fechaIni.plusMonths(1);
-                        fechaFin.plusMonths(1);
+                        fechaIni = fechaIni.plusMonths(1);
+                        fechaFin = fechaFin.plusMonths(1);
                         break;
                     default:
                         break;

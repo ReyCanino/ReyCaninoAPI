@@ -12,10 +12,10 @@ public class Horario {
     private Date fechaConsulta;
     private Reserva reserva;
     private String tipoRepeticion;
-    private int cantRepeticiones;
+    private Integer cantRepeticiones;
 
     public Horario(String servicio, String id, String tiendaCanina, OffsetDateTime ff, OffsetDateTime fi,
-            Date fechaConsulta, Reserva reserva, String tipoRepeticion, int cantRepeticiones) {
+            Date fechaConsulta, Reserva reserva, String tipoRepeticion, Integer cantRepeticiones) {
         this.servicio = servicio;
         this.id = id;
         this.tiendaCanina = tiendaCanina;
@@ -94,11 +94,11 @@ public class Horario {
         this.tipoRepeticion = tipoRepeticion;
     }
 
-    public int getCantRepeticiones() {
+    public Integer getCantRepeticiones() {
         return this.cantRepeticiones;
     }
 
-    public void setCantRepeticiones(int cantRepeticiones) {
+    public void setCantRepeticiones(Integer cantRepeticiones) {
         this.cantRepeticiones = cantRepeticiones;
     }
 
