@@ -178,7 +178,7 @@ class DemoApplicationTests {
 		String url = "/reyCanino/horario/agregar";
 		Horario anObject = new Horario("veterinaria", null, "f27d9717-9f4c-4ad2-ae36-8e9117b3848e", null, null, null,
 				null, "Diaria", 1);
-
+		anObject.toString();
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
