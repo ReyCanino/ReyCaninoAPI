@@ -55,7 +55,7 @@ public class ReyCaninoService {
         return dbService.buscarHorarioAdmin(id);
     }
 
-    public List<Cliente> consultarTiendaServicio (String service) {
+    public Cliente consultarTiendaServicio (String service) {
         return dbService.buscarTiendaServicio(service);
     }
 
