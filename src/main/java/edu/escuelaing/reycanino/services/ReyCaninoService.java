@@ -70,7 +70,11 @@ public class ReyCaninoService {
 
     public void cancelarHorario(String id) {
         dbService.eliminarHorario(id);
-        
+  
+    }
+
+    public void cancelarCliente(String id) {
+        dbService.eliminarCliente(id);
     }
 
     public Cliente consultarCliente(String cliente) {

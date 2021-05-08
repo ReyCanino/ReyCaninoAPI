@@ -104,6 +104,12 @@ class DemoApplicationTests {
 	}
 
 	@Test
+	void testEliminarCliente() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/clienteEliminar/cfcdf418-0f3a-4017-9295-d5e81e28641a")
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
 	void testConsultarTiendaServicio() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/tienda/peluqueria")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
