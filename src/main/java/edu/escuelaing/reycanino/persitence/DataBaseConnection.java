@@ -31,7 +31,6 @@ public class DataBaseConnection {
     private static final String RESERVA_LABEL = "reserva";
     private static final String CLIENTE_LABEL = "cliente";
     private static final String Tienda_Canina = "tiendaCanina";
-    private static final String Servicio = "servicio";
     private static final int PORT = 32769;
 
     private void createConnection() {
@@ -149,10 +148,10 @@ public class DataBaseConnection {
         return reserva;
     }
 
-    public Cliente buscarTiendaServicio (String service) {
+    public Cliente buscarTiendaServicio (String servicio) {
         Cliente reserva = null;
         createConnection();
-        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE).filter(res -> res.getField(Servicio).eq(service))
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE).filter(res -> res.getField("servicio").eq(servicio))
                 .run(connection, Reserva.class);
         while (query.hasNext()) {
             reserva = query.next();

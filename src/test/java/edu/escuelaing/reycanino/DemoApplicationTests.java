@@ -105,7 +105,7 @@ class DemoApplicationTests {
 
 	@Test
 	void testConsultarTiendaServicio() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/tienda/veterinaria")
+		mvc.perform(MockMvcRequestBuilders.get("/reyCanino/tienda/peluqueria")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 }
