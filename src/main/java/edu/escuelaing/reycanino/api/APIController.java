@@ -129,6 +129,12 @@ public class APIController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(value = "/clienteEliminar/{id}")
+    public ResponseEntity<String> eliminarCliente(@PathVariable() String id) {
+        services.cancelarCliente(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping(value = "/horario/agregar")
     public ResponseEntity<Horario> agregarHorario(@RequestBody Horario horario){
         services.agregarHorario(horario);
