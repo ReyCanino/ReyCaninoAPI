@@ -148,16 +148,17 @@ public class DataBaseConnection {
         return reserva;
     }
 
-    public Cliente buscarTiendaServicio (String servicio) {
-        Cliente reserva = null;
+    public List<Cliente> buscarTiendaServicio(String id) {
+        List<Cliente> horario = new ArrayList<>();
         createConnection();
-        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE).filter(res -> res.getField("servicio").eq(servicio))
-                .run(connection, Reserva.class);
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE)
+                .filter(res -> res.getField("servicio").eq(id))
+                .run(connection, Cliente.class);
         while (query.hasNext()) {
-            reserva = query.next();
+            horario.add(query.next());
         }
         connection.close();
-        return reserva;
+        return horario;
     }
 
     public void actualizarHorario(Horario horario) {
