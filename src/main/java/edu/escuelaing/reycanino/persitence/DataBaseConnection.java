@@ -148,6 +148,19 @@ public class DataBaseConnection {
         return reserva;
     }
 
+    public List<Cliente> buscarTiendaServicio(String id) {
+        List<Cliente> horario = new ArrayList<>();
+        createConnection();
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE)
+                .filter(res -> res.getField("servicio").eq(id))
+                .run(connection, Cliente.class);
+        while (query.hasNext()) {
+            horario.add(query.next());
+        }
+        connection.close();
+        return horario;
+    }
+
     public void actualizarHorario(Horario horario) {
         createConnection();
         r.db(DB_NAME).table(TABLE_HORARIO).get(horario.getId()).update(r.hashMap(RESERVA_LABEL,
