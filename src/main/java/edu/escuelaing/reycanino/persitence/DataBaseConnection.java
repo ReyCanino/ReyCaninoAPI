@@ -31,6 +31,7 @@ public class DataBaseConnection {
     private static final String RESERVA_LABEL = "reserva";
     private static final String CLIENTE_LABEL = "cliente";
     private static final String Tienda_Canina = "tiendaCanina";
+    private static final String Servicio = "servicio";
     private static final int PORT = 32769;
 
     private void createConnection() {
@@ -140,6 +141,18 @@ public class DataBaseConnection {
         Reserva reserva = null;
         createConnection();
         Cursor<Reserva> query = r.db(DB_NAME).table(TABLE_RESERVA).filter(res -> res.getField("id").eq(id))
+                .run(connection, Reserva.class);
+        while (query.hasNext()) {
+            reserva = query.next();
+        }
+        connection.close();
+        return reserva;
+    }
+
+    public Cliente buscarTiendaServicio (String service) {
+        Cliente reserva = null;
+        createConnection();
+        Cursor<Cliente> query = r.db(DB_NAME).table(TABLE_CLIENTE).filter(res -> res.getField(Servicio).eq(service))
                 .run(connection, Reserva.class);
         while (query.hasNext()) {
             reserva = query.next();

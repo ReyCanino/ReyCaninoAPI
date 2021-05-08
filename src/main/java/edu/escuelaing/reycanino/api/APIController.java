@@ -1,6 +1,5 @@
 package edu.escuelaing.reycanino.api;
 
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,6 +84,12 @@ public class APIController {
     public ResponseEntity<Horario> consultarReserva(@PathVariable() String id) {
         Horario horario = services.consultarReserva(id);
         return new ResponseEntity<>(horario, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/tienda/{servicio}")
+    public ResponseEntity<Cliente> buscarServicio(@PathVariable() String servicio) {
+        Cliente cliente = services.consultarTiendaServicio(servicio);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
     @GetMapping(value = "/horario/{id}")
